@@ -19,9 +19,14 @@ namespace LearningBasics.BasicsOrBasics.Tree
         }
         public class TreeNode
         {
-            public TreeNode()
+            public TreeNode left { get; set; }
+            public TreeNode right { get; set; }
+            public int value { get; set; }
+            public TreeNode(int value)
             {
-
+                left = null;
+                right = null;
+                this.value = value;
             }
         }
     }
