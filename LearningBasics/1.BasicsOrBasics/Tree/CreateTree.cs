@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LearningBasics.HelperClasses;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,18 +18,7 @@ namespace LearningBasics.BasicsOrBasics.Tree
         {
             return root;
         }
-        public class TreeNode
-        {
-            public TreeNode left { get; set; }
-            public TreeNode right { get; set; }
-            public int value { get; set; }
-            public TreeNode(int value)
-            {
-                left = null;
-                right = null;
-                this.value = value;
-            }
-        }
+      
     }
 }
 

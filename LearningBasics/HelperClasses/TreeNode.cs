@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LearningBasics.BasicsOrBasics
+namespace LearningBasics.HelperClasses
 {
-    internal class Heap
+    public class TreeNode
     {
+    
     }
 }

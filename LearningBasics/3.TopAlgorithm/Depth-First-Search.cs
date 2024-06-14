@@ -9,8 +9,19 @@ namespace LearningBasics._3.TopAlgorithm
 {
     public class Depth_First_Search
     {
- 
+        public void InOrder()
+        {
+        
+        }
+        public void PreOrder()
+        {
+        
+        }
 
+        public void PostOrder()
+        { 
+        
+        }
     }
 
 }

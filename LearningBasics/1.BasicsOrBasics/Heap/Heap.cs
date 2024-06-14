@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LearningBasics._3.TopAlgorithm
+namespace LearningBasics.BasicsOrBasics
 {
-    public class Breadth_First_Search
+    public class Heap
     {
-       
     }
 }
