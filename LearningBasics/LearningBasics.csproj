@@ -9,6 +9,13 @@
 
   <ItemGroup>
     <Folder Include="4.DynamicPrograminig\" />
+    <Folder Include="6.DesignPatterns\Creational\" />
+    <Folder Include="6.DesignPatterns\Creational\Builder\" />
+    <Folder Include="6.DesignPatterns\Creational\Prototype\" />
+    <Folder Include="6.DesignPatterns\Creational\Singleton\" />
+    <Folder Include="6.DesignPatterns\Adapter\" />
+    <Folder Include="6.DesignPatterns\Behavioural\" />
+    <Folder Include="6.DesignPatterns\Structural\" />
   </ItemGroup>
 
 </Project>

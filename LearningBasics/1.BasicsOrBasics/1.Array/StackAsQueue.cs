@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace LearningBasics.BasicsOrBasics.Stack
 {
-    internal class StackAsQueue
+    public class StackAsQueue
     {
+
     }
 }
