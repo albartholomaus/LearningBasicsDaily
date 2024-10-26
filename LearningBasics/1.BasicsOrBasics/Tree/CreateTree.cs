@@ -136,7 +136,7 @@ namespace LearningBasics.BasicsOrBasics.Tree
                 }
                 else
                 {
-                    TreeNode mini
+                    
                 }
             }
 
