@@ -8,14 +8,16 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="4.DynamicPrograminig\" />
-    <Folder Include="6.DesignPatterns\Creational\" />
-    <Folder Include="6.DesignPatterns\Creational\Builder\" />
-    <Folder Include="6.DesignPatterns\Creational\Prototype\" />
-    <Folder Include="6.DesignPatterns\Creational\Singleton\" />
-    <Folder Include="6.DesignPatterns\Adapter\" />
-    <Folder Include="6.DesignPatterns\Behavioural\" />
-    <Folder Include="6.DesignPatterns\Structural\" />
+    <Compile Remove="4.DynamicPrograminig\**" />
+    <Compile Remove="6.DesignPatterns\**" />
+    <EmbeddedResource Remove="4.DynamicPrograminig\**" />
+    <EmbeddedResource Remove="6.DesignPatterns\**" />
+    <None Remove="4.DynamicPrograminig\**" />
+    <None Remove="6.DesignPatterns\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Patterns\Creational\Builder\Director\" />
   </ItemGroup>
 
 </Project>

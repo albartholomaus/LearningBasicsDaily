@@ -31,16 +31,6 @@ namespace LearningBasics.BasicsOrBasics.Tree
             RemoveP(root, 10);
             Console.WriteLine();
             Console.WriteLine();
-            Console.WriteLine();
-            Console.WriteLine();
-            Console.WriteLine();
-            Console.WriteLine();
-            Console.WriteLine();
-            Console.WriteLine();
-            Console.WriteLine();
-            Console.WriteLine();
-            Console.WriteLine();
-            Console.WriteLine();
         }
 
         public TreeNode Insert(TreeNode root, int value)
@@ -65,7 +55,7 @@ namespace LearningBasics.BasicsOrBasics.Tree
             {
                 return new TreeNode(value);
             }
-            if (value<root.value)
+            if (value < root.value)
             {
                 root = InsertP(root.left, value);
             }
@@ -126,7 +116,7 @@ namespace LearningBasics.BasicsOrBasics.Tree
             }
             else
             {
-                if (root.left==null)
+                if (root.left == null)
                 {
                     return root.right;
                 }
@@ -136,10 +126,13 @@ namespace LearningBasics.BasicsOrBasics.Tree
                 }
                 else
                 {
-                    
+                    TreeNode miniValue = MiniP(root.right);
+                    root.value = miniValue.value;
+                    root.right = RemoveP(root.right, miniValue.value);
                 }
+               
             }
-
+            return root;
         }
 
 
@@ -151,7 +144,14 @@ namespace LearningBasics.BasicsOrBasics.Tree
             }
             return root;
         }
-
+        private TreeNode MiniP(TreeNode root)
+        {
+            while (root.left != null && root != null)
+            {
+                root = root.left;
+            }
+            return root;
+        }
 
         public bool SearchTree(TreeNode root, int target)
         {
@@ -172,9 +172,6 @@ namespace LearningBasics.BasicsOrBasics.Tree
                 return true;
             }
         }
-
-
-
     }
 }
 
