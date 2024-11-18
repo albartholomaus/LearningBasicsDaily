@@ -11,19 +11,21 @@ namespace LearningBasics.Patterns.Creational.Builder.Product
     {
         private List<string> parts = new List<string>();//for testing so we dont have to wright a few class for parts 
         private readonly string _carType;
-        public Car(string carType) {
+        public Car(string carType)
+        {
 
-            _carType=carType;
+            _carType = carType;
         }
-        public void Add(string part)
+        public void AddPart(string part)
         { parts.Add(part); }
 
-        public void Show() {
+        public void Show()
+        {
             Console.WriteLine("Parts from the Product");
 
             foreach (var part in parts)
             {
-                  Console.WriteLine(part);
+                Console.WriteLine(part);
             }
         }
 

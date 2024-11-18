@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LearningBasics.Patterns.Creational.Factory_pattern._1.Product;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,20 +7,20 @@ using System.Threading.Tasks;
 
 namespace LearningBasics.Patterns.Creational.Factory_pattern._2.ConcreateProduct
 {
-    //concreate product, this is where we implment the discount service 
-    public class CountryCodeService : DiscountService
+    //concreate product, this is where we implement the discount service 
+    public class CountryDiscountService : DiscountService
     {
-        private readonly string _countryCodeIdentifer;
-        public CountryCodeService(string countryIdentifer)
+        private readonly string CountryCodeIdentifier;
+        public CountryDiscountService(string countryIdentifier)
         {
-            _countryCodeIdentifer = countryIdentifer;
+            CountryCodeIdentifier = countryIdentifier;
         }
 
         public override int DiscountPercentage
         {
             get
             {
-                switch (_countryCodeIdentifer)
+                switch (CountryCodeIdentifier)
                 {
                     case "BE":
                         return 20;

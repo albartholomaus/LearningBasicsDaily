@@ -17,7 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Patterns\Creational\Builder\Director\" />
+    <Folder Include="Patterns\Behavioral\Observer\OrderService\" />
   </ItemGroup>
 
 </Project>

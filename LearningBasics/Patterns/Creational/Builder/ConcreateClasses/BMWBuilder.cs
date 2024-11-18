@@ -1,29 +1,28 @@
-﻿using System;
+﻿using LearningBasics.Patterns.Creational.Builder.Builder;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using LearningBasics.Patterns.Creational.Builder;
-using LearningBasics.Patterns.Creational.Builder.Builder;
 
 namespace LearningBasics.Patterns.Creational.Builder.ConcreateClasses
 {
-    public class MiniBuilder : CarBuilder
+    public class BMWBuilder : CarBuilder
     {
-        public MiniBuilder(): base("mini")
-        { 
-            
-        
+        public BMWBuilder() : base("mini")
+        {
+
+
         }
 
         public override void BuildEngine()
         {
-            Car.AddPart("V8");
+            Car.AddPart("v6");
         }
 
         public override void BuildFrame()
         {
-            Car.AddPart("2 Door");
+            Car.AddPart("4 Door");
         }
     }
 }

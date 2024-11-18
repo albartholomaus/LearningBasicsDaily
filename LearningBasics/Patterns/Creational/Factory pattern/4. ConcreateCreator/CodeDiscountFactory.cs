@@ -1,4 +1,7 @@
-﻿using System;
+﻿using LearningBasics.Patterns.Creational.Factory_pattern._1.Product;
+using LearningBasics.Patterns.Creational.Factory_pattern._2.ConcreateProduct;
+using LearningBasics.Patterns.Creational.Factory_pattern._3.Creator;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,14 +11,14 @@ namespace LearningBasics.Patterns.Creational.Factory_pattern._4._ConcreateCreato
 {
     public class CodeDiscountFactory : DiscountFactory
     {
-        private readonly Guid _Code;
+        private readonly Guid Code;
         public CodeDiscountFactory(Guid code)
         {
-            _Code = code;
+            Code = code;
         }
         public override DiscountService CreateDiscountService()
         {
-            return new CodeDiscounService(_Code);
+            return new CodeDiscountService(Code);
         }
     }
 }

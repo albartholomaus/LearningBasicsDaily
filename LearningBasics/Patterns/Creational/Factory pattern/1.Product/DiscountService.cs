@@ -13,5 +13,4 @@ namespace LearningBasics.Patterns.Creational.Factory_pattern._1.Product
         public override string ToString() => GetType().Name;//for testing 
 
     }
-
 }

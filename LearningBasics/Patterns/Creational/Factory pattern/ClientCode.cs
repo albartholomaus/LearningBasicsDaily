@@ -1,4 +1,7 @@
-﻿using System;
+﻿using LearningBasics.Patterns.Creational.Factory_pattern._2.ConcreateProduct;
+using LearningBasics.Patterns.Creational.Factory_pattern._3.Creator;
+using LearningBasics.Patterns.Creational.Factory_pattern._4._ConcreateCreator;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,13 +14,13 @@ namespace LearningBasics.Patterns.Creational.Factory_pattern
 
         public void CallFactories()
         {
-            var fatories = new List<DiscountFactory> { new CodeDiscountFactory(Guid.NewGuid()),
+            var factories = new List<DiscountFactory> { new CodeDiscountFactory(Guid.NewGuid()),
                 new CountryDiscountFactory("BE")};
 
-            foreach (var f in fatories) {
-                var discuntService = f.CreateDiscountService();
+            foreach (var f in factories) {
+                var discountService = f.CreateDiscountService();
 
-                Console.WriteLine($"percentage {discuntService.DiscountPercentage}From {discuntService}");
+                Console.WriteLine($"percentage {discountService.DiscountPercentage}From {discountService}");
             
             }
         }
