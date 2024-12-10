@@ -1,0 +1,1 @@
+https://stackoverflow.com/questions/26291178/when-should-i-use-the-abstract-factory-pattern

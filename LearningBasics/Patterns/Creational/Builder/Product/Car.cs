@@ -9,7 +9,7 @@ namespace LearningBasics.Patterns.Creational.Builder.Product
 {
     public class Car
     {
-        private List<string> parts = new List<string>();//for testing so we dont have to wright a few class for parts 
+        private List<string> parts = new List<string>();//for testing so we don't have to wright a few class for parts 
         private readonly string _carType;
         public Car(string carType)
         {

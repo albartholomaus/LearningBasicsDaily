@@ -13,54 +13,58 @@ namespace LearningBasics._1.BasicsOrBasics._2.LinkedList
 {
     public class DoubleLinkedListPractice
     {
-        DoubleNode start = new DoubleNode();
-        DoubleNode tail = new DoubleNode();
+
         public DoubleLinkedListPractice()
         {
-            start.Next = tail.Previous;
-            tail.Previous = start.Next;
+            DoubleNode start = CreateDoubleListP();
+
             Console.WriteLine("FirstList");
-            CreateDoubleLinkedList();
             Print(start);
-            start = ReverseList2(start);
+
+            start = ReverseListP(start);
             Console.WriteLine("");
-            Console.WriteLine("FirstList");
+            Console.WriteLine("reversed");
             Print(start);
         }
 
-
-        public void CreateDoubleLinkedList()
+        public DoubleNode CreateDoubleLinkedList()
         {
-            DoubleNode current;
+            DoubleNode current = new();
+            DoubleNode start = new();
             current = start;
             int i = 1;
             while (i < 5)
             {
-
                 DoubleNode NewNode = new DoubleNode(i);
                 current.Next = NewNode;
                 NewNode.Previous = current;
                 current = current.Next;
                 i++;
             }
+            return start;
+        }
+
+        public DoubleNode CreateDoubleListP()
+        {
+            DoubleNode start = new();
+            DoubleNode tail = new(int.MaxValue);
+            DoubleNode returnNode = start;
+
+            for (int i = 1; i != 10; i++)
+            {
+                DoubleNode newDoubleNode = new(i);
+                start.Next = newDoubleNode;
+                newDoubleNode.Previous = start;
+                newDoubleNode.Next = tail;
+                tail.Previous = newDoubleNode;
+                start = start.Next;
+
+            }
+
+            return returnNode;
         }
 
         public DoubleNode ReverseList(DoubleNode current)
-        {
-            if (current == null)
-            {
-                return null;
-            }
-            DoubleNode temp = current.Previous;
-            current.Previous = current.Next;
-            current.Next = temp;
-            if (current.Previous == null)
-            {
-                return current;
-            }
-            return ReverseList(current.Previous);
-        }
-        public DoubleNode ReverseList2(DoubleNode current)
         {
             if (current == null)
             {
@@ -71,6 +75,7 @@ namespace LearningBasics._1.BasicsOrBasics._2.LinkedList
                 DoubleNode Temp = current.Previous;
                 current.Previous = current.Next;
                 current.Next = Temp;
+                
                 if (current.Previous == null)
                 {
                     return current;
@@ -79,11 +84,39 @@ namespace LearningBasics._1.BasicsOrBasics._2.LinkedList
             }
             return current;
         }
+
+        public DoubleNode ReverseListP(DoubleNode current)
+        {
+           
+            while (current != null)
+            {
+              
+                DoubleNode temp = current.Previous;
+                current.Previous = current.Next;
+                current.Next = temp;
+                if (current.Previous == null)
+                {
+                    return current;
+                }
+                current = current.Previous;
+            }
+            return current;
+        }
+
         public void Print(DoubleNode head)
         {
             while (head != null)
             {
-                Console.Write($"{head.Value}");
+                if (head.Value==int.MaxValue || head.Value==0)
+                {
+                    head = head.Next;
+                    continue;
+                }
+                else
+                {
+                    Console.Write($"{head.Value} ");
+                    
+                }
                 head = head.Next;
             }
         }

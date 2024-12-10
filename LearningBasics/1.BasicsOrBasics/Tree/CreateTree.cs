@@ -18,7 +18,6 @@ namespace LearningBasics.BasicsOrBasics.Tree
 
         public CreateTree()
         {
-
             int value = 0;
             int[] array = [50, 40, 60, 30, 70, 20, 80, 10];
             TreeNode root = new(array[value]);

@@ -20,7 +20,6 @@ namespace LearningBasics.BasicAlgorthims
             BinarySearchP(array, 3);
         }
 
-
         private int BinarySearchMethod(int[] array, int target)
         {
             int left = 0;

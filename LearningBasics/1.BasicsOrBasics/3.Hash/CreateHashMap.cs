@@ -37,6 +37,7 @@ namespace LearningBasics.BasicsOrBasics.Hash
             }
             return index % Capacity;
         }
+
         public void ReHash()
         {
             Capacity = 2 * Capacity;
@@ -53,7 +54,6 @@ namespace LearningBasics.BasicsOrBasics.Hash
                 }
             }
         }
-
         public void ReHashP()
         {
             Capacity = Capacity * 2;
@@ -85,7 +85,6 @@ namespace LearningBasics.BasicsOrBasics.Hash
             }
             return string.Empty;
         }
-
         public string GetP(string key)
         {
             int index = Hash(key);
@@ -100,6 +99,7 @@ namespace LearningBasics.BasicsOrBasics.Hash
             }
             return string.Empty;
         }
+
         public void Put(string key, string value)
         {
             int index = Hash(key);
@@ -127,6 +127,8 @@ namespace LearningBasics.BasicsOrBasics.Hash
         {
 
         }
+
+
         public void Remove(string key)
         {
             if (Get(key) == null)

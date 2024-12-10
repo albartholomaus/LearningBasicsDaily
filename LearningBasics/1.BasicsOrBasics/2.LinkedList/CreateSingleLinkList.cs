@@ -12,10 +12,12 @@ namespace LearningBasics.BasicsOrBasics.LinkedList
     {
         public SingleLinkedListCreate()
         {
-            Node firstList = CreateList();
+            Node firstList = CreateListP();
             Node secondList = CreateList();
+            ReverseListP(secondList);
             MergeTwoLists(firstList, secondList);
         }
+
 
         public static Node CreateList()
         {
@@ -45,11 +47,23 @@ namespace LearningBasics.BasicsOrBasics.LinkedList
 
             }
         }
-        public static Node CreateListP()
+
+        public Node CreateListP()
         {
-            Node list;
-            return null;
+            Node start = new();
+            Node retunNode = start;
+            Node tail = new();
+
+            for (int i = 10; i < 100; i += 10)
+            {
+                Node newNode = new(i);
+                start.Next = newNode;
+                newNode.Next = tail;
+                start = start.Next;
+            }
+            return retunNode.Next;
         }
+
         public Node ReverseList(Node head)
         {
             Node previous = null;
@@ -67,20 +81,20 @@ namespace LearningBasics.BasicsOrBasics.LinkedList
         }
         public Node ReverseListP(Node head)
         {
-            Node prev = null;
+            Node curr = head;
             Node next = null;
-            Node current = head;
+            Node prev = null;
 
-            while (current != null)
+            while (curr != null)
             {
-                next = current.Next;
-                current.Next = prev;
-                prev = current;
-                current = next;
+                next = curr.Next;
+                curr.Next = prev;
+                prev = curr;
+                curr = next;
             }
-            head = prev;
-            return head;
+            return prev;
         }
+
         public Node MergeTwoLists(Node list1, Node list2)
         {
             Node dummy = new Node(0);
@@ -113,12 +127,12 @@ namespace LearningBasics.BasicsOrBasics.LinkedList
         }
         public Node MergeTwoListsP(Node list1, Node list2)
         {
-            Node dummy = new Node();
-            Node tail = dummy;
+            Node tail=new();
+            Node dummy=tail;
 
             while (list1 != null && list2 != null)
             {
-                if (list1.Value < list2.Value)
+                if (list1.Value > list2.Value)
                 {
                     tail = list1;
                     list1 = list1.Next;
@@ -127,18 +141,19 @@ namespace LearningBasics.BasicsOrBasics.LinkedList
                 {
                     tail = list2;
                     list1 = list2.Next;
+
                 }
                 tail = tail.Next;
             }
-            if (list1!=null)
-            {
-                tail.Next = list1;
-            }
-            if (list2 != null)
+            if (list1 == null)
             {
                 tail.Next = list2;
             }
-            return dummy.Next;
+            if (list2 == null)
+            {
+                tail.Next = list1;
+            }
+            return dummy;
         }
 
     }
@@ -152,6 +167,18 @@ namespace LearningBasics.BasicsOrBasics.LinkedList
             Value = value;
             Next = next;
 
+        }
+    }
+
+    public class Node2
+    {
+        public int Value { set; get; }
+        public Node Next { set; get; }
+
+        public Node2(int value = 0, Node next = null)
+        {
+            Value = value;
+            Next = Next;
         }
     }
 }

@@ -18,11 +18,13 @@ namespace LearningBasics._1.BasicsOrBasics._3.Hash
             {
                 hashMap[i] = new ChainingNode();
             }
+
             Put(15, 10);
             Put(15, 12);
             Put(15, 11);
             Remove(15,0);
         }
+
         public void Put(int key, int value)
         {
             ChainingNode current = hashMap[key % hashMap.Length];
@@ -36,6 +38,10 @@ namespace LearningBasics._1.BasicsOrBasics._3.Hash
                 }
                 current = current.Next;
             }
+        }
+        public void Put()
+        { 
+            
         }
         public void Get(int key)
         {
