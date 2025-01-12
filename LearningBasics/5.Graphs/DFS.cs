@@ -48,24 +48,24 @@ namespace LearningBasics._5.Graphs
             return count;
         }
 
-        public int DFSMethodP(int[][] grid, int row, int col, int[][] visited)
+        public int DFSP(int[][] grid, int row, int column, int[][] visited)
         {
             int rowLength = grid.Length, colLength = grid[0].Length;
-            if (Math.Min(row, col) < 0 || row == rowLength || col == colLength || grid[row][col] == 1 || visited[row][col] == 1)
+            if (Math.Min(row, column) < 0 || row >= rowLength || column >= colLength || grid[row][column] == 1 || visited[row][column] == 1)
             {
                 return 0;
             }
-            if (row == rowLength - 1 || col == colLength - 1)
+            if (row == rowLength - 1 || column == colLength - 1)
             {
                 return 1;
             }
-            visited[row][col] = 1;
             int count = 0;
-            count += DFSMethodP(grid, row, col, visited);
-            count += DFSMethodP(grid, row, col, visited);
-            count += DFSMethodP(grid, row, col, visited);
-            count += DFSMethodP(grid, row, col, visited);
-            visited[row ][col]= 0;
+            visited[row][column] = 1;
+            count += DFSP(grid, row - 1, column, visited);
+            count += DFSP(grid, row + 1, column, visited);
+            count += DFSP(grid, row, column - 1, visited);
+            count += DFSP(grid, row, column + 1, visited);
+            visited[row][column] = 0;
             return count;
         }
 

@@ -17,6 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="DynamicProgramming\" />
     <Folder Include="PatternPractice\FactoryPattern\" />
     <Folder Include="Patterns\Behavioral\Observer\OrderService\" />
   </ItemGroup>

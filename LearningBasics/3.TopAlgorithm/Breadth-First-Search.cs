@@ -1,5 +1,6 @@
 ﻿using LearningBasics.HelperClasses;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.Design.Serialization;
 using System.Linq;
@@ -44,31 +45,26 @@ namespace LearningBasics._3.TopAlgorithm
         }
         public void BFSP(TreeNode root)
         {
-            int testTarget = 100;
             Queue<TreeNode> queue = new();
-            int level = 0;
-            if (root!=null)
-            {
-                queue.Enqueue(root);
-            }
+            queue.Enqueue(root);
+            int level = 1;
             while (queue.Any())
             {
-                Console.WriteLine(level);
                 for (int i = 0; i < queue.Count; i++)
                 {
-
-                    if (root.left !=null)
+                    TreeNode current = queue.Dequeue();
+                    if (current.left != null)
                     {
-                        queue.Enqueue(root.left);
+                        queue.Enqueue(current.left);
                     }
-                    if (root.right != null)
+                    if (current.right != null)
                     {
-                        queue.Enqueue(root.right);
+                        queue.Enqueue(current.right);
                     }
                 }
                 level++;
-            }        
-        } 
+            }
+        }
 
     }
 }

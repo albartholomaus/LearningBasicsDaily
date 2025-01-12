@@ -10,6 +10,7 @@ using System.ComponentModel.Design.Serialization;
 using System.Xml.Schema;
 using System.Text.Json.Serialization;
 using LearningBasics.BasicsOrBasics.Hash;
+using System.Diagnostics.CodeAnalysis;
 
 namespace LearningBasics.BasicsOrBasics.Tree
 {
@@ -25,7 +26,7 @@ namespace LearningBasics.BasicsOrBasics.Tree
             for (int i = 0; i < array.Length - 1; i++)
             {
                 value++;
-                InsertP(root, array[value]);
+                Insert(root, array[value]);
             }
             RemoveP(root, 10);
             Console.WriteLine();
@@ -56,21 +57,23 @@ namespace LearningBasics.BasicsOrBasics.Tree
             }
             if (value < root.value)
             {
-                root = InsertP(root.left, value);
+                root.left = InsertP(root.left, value);
             }
-            if (value > root.value)
+            else if (value > root.value)
             {
-                root = InsertP(root.right, value);
+                root.right = InsertP(root.right, value);
             }
             return root;
         }
 
         public TreeNode Remove(TreeNode root, int value)
         {
+            //base case , also handles childless nodes as it retuns null to the previous call and it then makes that node null. 
             if (root == null)
             {
                 return null;
             }
+            //the next 2 are for finding the right path 
             if (value > root.value)
             {
                 root.right = Remove(root.right, value);
@@ -81,6 +84,7 @@ namespace LearningBasics.BasicsOrBasics.Tree
             }
             else
             {
+                //the next to here are, as we are removing,we found the value and we are removing the found value and returing an actual value to replace it with. because we are removing it. if on or the other is null we can remove it. in the even of removing a chidless node the case case would handle it. 
                 if (root.left == null)
                 {
                     return root.right;
@@ -91,14 +95,16 @@ namespace LearningBasics.BasicsOrBasics.Tree
                 }
                 else
                 {
-                    TreeNode minNode = MinValueNode(root.right);
+                    //we need to firt find the lost value node. we could do this from the left to find the higest node but as we are going right we will need to find the lowest. 
+                    TreeNode minNode = MinValueNodeP(root.right);
+                    //we are at a node that we need to replace, here are are taking said minNode value and add it to the root value 
                     root.value = minNode.value;
+                    //Now we need to remove the node that we replace the value with. it is much easier to do this then to remove said now and replace it. 
                     root.right = Remove(root.right, minNode.value);
                 }
             }
             return root;
         }
-
         public TreeNode RemoveP(TreeNode root, int value)
         {
             if (root == null)
@@ -107,11 +113,11 @@ namespace LearningBasics.BasicsOrBasics.Tree
             }
             if (value < root.value)
             {
-                root = RemoveP(root.left, value);
+                root.left = RemoveP(root.left, value);
             }
-            if (value > root.value)
+            else if (value > root.value)
             {
-                root = RemoveP(root.right, value);
+                root.right = RemoveP(root.right, value);
             }
             else
             {
@@ -119,31 +125,30 @@ namespace LearningBasics.BasicsOrBasics.Tree
                 {
                     return root.right;
                 }
-                else if (root.right == null)
+
+                if (root.right == null)
                 {
                     return root.left;
                 }
                 else
                 {
-                    TreeNode miniValue = MiniP(root.right);
-                    root.value = miniValue.value;
-                    root.right = RemoveP(root.right, miniValue.value);
+                    TreeNode minNode = FindMindNodeP(root.right);
+                    root.value = minNode.value;
+                    root.right = RemoveP(root.right, minNode.value);
                 }
-               
             }
             return root;
         }
-
-
-        private TreeNode MinValueNode(TreeNode root)
+        private TreeNode MinValueNodeP(TreeNode root)
         {
-            while (root != null && root.left != null)
+            while (root.left != null && root != null)
             {
                 root = root.left;
             }
             return root;
         }
-        private TreeNode MiniP(TreeNode root)
+
+        private TreeNode FindMindNodeP(TreeNode root)
         {
             while (root.left != null && root != null)
             {
@@ -160,17 +165,37 @@ namespace LearningBasics.BasicsOrBasics.Tree
             }
             if (target > root.value)
             {
-                return SearchTree(root.left, target);
+                return SearchTree(root.right, target);
             }
             if (target < root.value)
             {
-                return SearchTree(root.right, target);
+                return SearchTree(root.left, target);
             }
             else
             {
                 return true;
             }
         }
+
+        public bool SearchTreeP(TreeNode root, int target)
+        {
+
+            if (root == null)
+            {
+                return false;
+            }
+            else if (target < root.value)
+            {
+                return SearchTreeP(root.left, target);
+            }
+            else if (target > root.value)
+            {
+                return SearchTreeP(root.right, target);
+            }
+            else return true;
+
+        }
+
     }
 }
 

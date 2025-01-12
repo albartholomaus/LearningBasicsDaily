@@ -17,7 +17,7 @@ namespace LearningBasics._3.TopAlgorithm
             int[] nums = [4, 2, 2, 4, 4, 4, 4, 3, 3, 3];
             int[] numsTotal = [4, 2, 2, 4, 2, 9, 4, 3, 3, 3];
             int target = 8;
-            ShortestSubArray2(nums, target);
+            SortestSubnArray(nums, target);
         }
         public int LongestSubArray(int[] nums)
         {
@@ -33,12 +33,13 @@ namespace LearningBasics._3.TopAlgorithm
             }
             return length;
         }
-        public int LongestSubArray2(int[] nums)
+        public int LongestSubArrayP(int[] nums)
         {
-            int L = 0, length = 0;
+            int L = 0;
+            int length = 0;
             for (int R = 0; R < nums.Length; R++)
             {
-                if (nums[L] != nums[R])
+                if (nums[L] == nums[R])
                 {
                     L = R;
                 }
@@ -47,15 +48,19 @@ namespace LearningBasics._3.TopAlgorithm
             return length;
         }
 
-        public int ShortestSubArray(int[] nums, int target)//target== smallest of the total of the window. 
-        {
 
+
+        //give a target value find the shortest total of elements need to make the target value. 
+        public int ShortestTotalArray(int[] nums, int target) 
+        {// need three varibles, one of the second pointer. the total and the length, length is set to max int as this is to terminate if we end up going out of bonces or hitting the int limit.
             int L = 0, total = 0;
             int length = int.MaxValue;
             for (int R = 0; R < nums.Length; R++)
             {
+                //adding to total of the values for the index of R.
                 total += nums[R];
 
+                // If we hit the total or go above it we need to calculate the length, then remove where L is, the move up L
                 while (total >= target)
                 {
                     length = Math.Min(R - L + 1, length);
@@ -63,33 +68,36 @@ namespace LearningBasics._3.TopAlgorithm
                     L++;
                 }
             }
+            // int has a max and to make sure we dont go a above it 
             if (length == int.MaxValue)
             {
                 return 0;
             }
+            //then return length 
             return length;
         }
-
-        public int ShortestSubArray2(int[] nums, int target)
+        public int SortestSubnArray(int[] nums, int target)
         {
-            int L = 0, total = 0;
-            int length = int.MaxValue;
-            for (int R = 0; R < nums.Length; R++)
+            int L = 0, total = 0, length = int.MaxValue;
+
+            for (int R = 0; R < nums.Length; R ++)
             {
                 total += nums[R];
-                while (total >= target)
+
+                if (total >= target)
                 {
                     total -= nums[L];
                     length = Math.Min(length, R - L + 1);
                     L++;
                 }
             }
-
             if (length==int.MaxValue)
             {
-                return int.MinValue;
+                return 0;
             }
             return length;
         }
+
+
     }
 }

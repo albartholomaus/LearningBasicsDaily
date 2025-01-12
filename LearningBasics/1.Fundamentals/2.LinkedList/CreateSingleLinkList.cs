@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
@@ -47,21 +48,18 @@ namespace LearningBasics.BasicsOrBasics.LinkedList
 
             }
         }
-
         public Node CreateListP()
         {
-            Node start = new();
-            Node retunNode = start;
-            Node tail = new();
+            Node head = new();
 
-            for (int i = 10; i < 100; i += 10)
+            Node returnNode = head;
+            for (int i = 1; i < 5; i++)
             {
-                Node newNode = new(i);
-                start.Next = newNode;
-                newNode.Next = tail;
-                start = start.Next;
+                Node NewNode = new(i);
+                head.Next = NewNode;
+                head = head.Next;
             }
-            return retunNode.Next;
+            return returnNode;
         }
 
         public Node ReverseList(Node head)
@@ -76,23 +74,21 @@ namespace LearningBasics.BasicsOrBasics.LinkedList
                 previous = current; //setting the node we just worked on to say this is the previous. 
                 current = next;//making the next node the one we need to work on
             }
-            head = previous;
+            head = previous;// we need to return previous here as the last next would be null. 
             return head;
         }
         public Node ReverseListP(Node head)
         {
-            Node curr = head;
-            Node next = null;
-            Node prev = null;
-
-            while (curr != null)
+            Node current = head;
+            Node previous = null;
+            while (current != null)
             {
-                next = curr.Next;
-                curr.Next = prev;
-                prev = curr;
-                curr = next;
+                Node Next = current.Next;
+                current.Next = previous;
+                previous = current;
+                current = Next;
             }
-            return prev;
+            return previous;
         }
 
         public Node MergeTwoLists(Node list1, Node list2)
@@ -125,37 +121,35 @@ namespace LearningBasics.BasicsOrBasics.LinkedList
             }
             return dummy.Next;
         }
-        public Node MergeTwoListsP(Node list1, Node list2)
+        public Node MergeListP(Node list1, Node list2)
         {
-            Node tail=new();
-            Node dummy=tail;
+            Node Temp = new();
+            Node returnNode = Temp;
 
-            while (list1 != null && list2 != null)
+            while (list1 != null && list2!=null)
             {
-                if (list1.Value > list2.Value)
+                if (list1.Value<list2.Value)
                 {
-                    tail = list1;
+                    Temp = list1;
                     list1 = list1.Next;
                 }
                 else
                 {
-                    tail = list2;
-                    list1 = list2.Next;
-
+                    Temp = list2;
+                    list2 = list2.Next;
                 }
-                tail = tail.Next;
+                Temp = Temp.Next;
             }
-            if (list1 == null)
+            if (list1!=null)
             {
-                tail.Next = list2;
+                Temp = list1;
             }
-            if (list2 == null)
+            if (list2 != null)
             {
-                tail.Next = list1;
+                Temp = list2;
             }
-            return dummy;
+            return returnNode;
         }
-
     }
     public class Node
     {
@@ -170,15 +164,5 @@ namespace LearningBasics.BasicsOrBasics.LinkedList
         }
     }
 
-    public class Node2
-    {
-        public int Value { set; get; }
-        public Node Next { set; get; }
 
-        public Node2(int value = 0, Node next = null)
-        {
-            Value = value;
-            Next = Next;
-        }
-    }
 }

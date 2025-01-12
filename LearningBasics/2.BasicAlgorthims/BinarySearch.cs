@@ -20,6 +20,8 @@ namespace LearningBasics.BasicAlgorthims
             BinarySearchP(array, 3);
         }
 
+
+
         private int BinarySearchMethod(int[] array, int target)
         {
             int left = 0;
@@ -45,29 +47,31 @@ namespace LearningBasics.BasicAlgorthims
             return -1;
         }
 
+
+
+
         private int BinarySearchP(int[] array, int target)
         {
             int left = 0;
+            int middle = 0;
             int right = array.Length - 1;
-            int mid;
-            while (left > right)
+            while (left < right)
             {
-                mid = (left+right) / 2;
-                if (target < array[mid])
+                 middle = (array.Length - 1) / 2;
+                if (target < array[middle])
                 {
-                    right = mid - 1;
+                    middle = middle - 1;
                 }
-                else if (target > array[mid])
+                if (target > array[middle])
                 {
-                    left = mid + 1;
+                    middle = middle + 1;
                 }
-                else
-                {
-                    return mid;
-                }
+                else return middle;
+               
             }
             return -1;
         }
+
     }
 }
 

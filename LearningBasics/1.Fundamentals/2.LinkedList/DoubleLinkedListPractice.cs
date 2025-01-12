@@ -2,12 +2,15 @@
 using LearningBasics.BasicsOrBasics.Hash;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Net.NetworkInformation;
 using System.Runtime.InteropServices;
+using System.Security;
 using System.Text;
 using System.Threading.Tasks;
 using System.Transactions;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace LearningBasics._1.BasicsOrBasics._2.LinkedList
 {
@@ -16,9 +19,9 @@ namespace LearningBasics._1.BasicsOrBasics._2.LinkedList
 
         public DoubleLinkedListPractice()
         {
-            DoubleNode start = CreateDoubleListP();
+            DoubleNode start = CreateDoubleLinkedListP();
 
-            Console.WriteLine("FirstList");
+            Console.WriteLine("First Created");
             Print(start);
 
             start = ReverseListP(start);
@@ -27,7 +30,7 @@ namespace LearningBasics._1.BasicsOrBasics._2.LinkedList
             Print(start);
         }
 
-        public DoubleNode CreateDoubleLinkedList()
+        public DoubleNode CreateDoubleLinkedListWithAHeadAndTail()
         {
             DoubleNode current = new();
             DoubleNode start = new();
@@ -43,71 +46,89 @@ namespace LearningBasics._1.BasicsOrBasics._2.LinkedList
             }
             return start;
         }
-
-        public DoubleNode CreateDoubleListP()
+       
+        public DoubleNode CreateDoubleLinkedList()
         {
-            DoubleNode start = new();
+            DoubleNode head =new(0);
             DoubleNode tail = new(int.MaxValue);
-            DoubleNode returnNode = start;
+            DoubleNode returnNode = head;
 
-            for (int i = 1; i != 10; i++)
+            for (int i = 1; i < 5; i++)
             {
-                DoubleNode newDoubleNode = new(i);
-                start.Next = newDoubleNode;
-                newDoubleNode.Previous = start;
-                newDoubleNode.Next = tail;
-                tail.Previous = newDoubleNode;
-                start = start.Next;
-
+                DoubleNode newNode = new(i);
+                head.Next = newNode;
+                newNode.Previous = head;
+                tail.Previous = newNode;
+                newNode.Next = tail;
+                head = head.Next;
             }
-
             return returnNode;
+        }
+        public DoubleNode CreateDoubleLinkedListP()
+        {
+            DoubleNode temp = new();
+            DoubleNode ReturnNode = temp;
+            for (int i = 1; i < 6; i++)
+            {
+                DoubleNode newNode = new(i);
+                temp.Next = newNode;
+                newNode.Previous = temp;
+                temp = temp.Next;
+            }
+            return ReturnNode;
         }
 
         public DoubleNode ReverseList(DoubleNode current)
         {
+            //checks if the Node we are getting is even there. if not stop. 
             if (current == null)
             {
                 return null;
             }
             while (current != null)
             {
-                DoubleNode Temp = current.Previous;
-                current.Previous = current.Next;
-                current.Next = Temp;
-                
+                //here we are swaping points of the previous and the next. 
+                DoubleNode Temp = current.Previous;//stores node 
+                current.Previous = current.Next;//moving next to previous, this also means that the Previous is NOT null preventing to terminating condition. 
+                current.Next = Temp;//moving the stored pointer to the next position 
+
+                //this is a terminatior, if current. Previous is ever null, we stop and return previous. 
                 if (current.Previous == null)
                 {
                     return current;
                 }
+                //because previous was tje next in line for what we need to move around we need to move current.Previous in to current to begain to work untill it is null./ 
                 current = current.Previous;
             }
-            return current;
+            //this should never be called if it does then something is wrong. 
+            return null;
         }
 
         public DoubleNode ReverseListP(DoubleNode current)
         {
-           
-            while (current != null)
+            if (current ==null)
             {
-              
+                return null;
+            }
+            while (current!=null)
+            {
                 DoubleNode temp = current.Previous;
                 current.Previous = current.Next;
                 current.Next = temp;
-                if (current.Previous == null)
+
+                if (current.Previous==null)
                 {
                     return current;
                 }
-                current = current.Previous;
             }
-            return current;
+            return null;
         }
 
         public void Print(DoubleNode head)
         {
             while (head != null)
             {
-                if (head.Value==int.MaxValue || head.Value==0)
+                if (head.Value == int.MaxValue || head.Value == 0)
                 {
                     head = head.Next;
                     continue;
@@ -115,7 +136,7 @@ namespace LearningBasics._1.BasicsOrBasics._2.LinkedList
                 else
                 {
                     Console.Write($"{head.Value} ");
-                    
+
                 }
                 head = head.Next;
             }
@@ -137,5 +158,6 @@ namespace LearningBasics._1.BasicsOrBasics._2.LinkedList
         }
 
     }
+
 }
 //https://www.geeksforgeeks.org/reverse-a-doubly-linked-list/

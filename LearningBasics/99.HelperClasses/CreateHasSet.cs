@@ -9,18 +9,22 @@ namespace LearningBasics.BasicsOrBasics.Hash
     internal class CreateHasSet
     {
         Node[] array = new Node[10];
-        NodeP[] arrayP = new NodeP[10];
+
 
         public CreateHasSet()
         {
             for (int i = 0; i < array.Length; i++)
             {
-                arrayP[i] = new NodeP();
+                array[i] = new Node();
             }
+            PutP(7, 20);
+            PutP(7, 20);
+            PutP(7, 21);
         }
 
         public void Put(int key, int value)
         {
+            //find node
             Node current = array[key % array.Length];
 
             while (current.next != null)
@@ -37,17 +41,19 @@ namespace LearningBasics.BasicsOrBasics.Hash
         }
         public void PutP(int key, int value)
         {
-            NodeP current = arrayP[key % arrayP.Length];
-            while (current.Next != null)
+            Node current = array[key % array.Length];
+            while (current.next != null)
             {
-                if (current.Next == null)
+                if (current.next == null)
                 {
-                    current.Next.Value = value;
-                    current.Next.Value = key;
+                    current.next.value = value;
+                    current.next.key = key;
                     return;
                 }
-                current = current.Next;
+                current = current.next;
             }
+            current.next = new Node(key, value);
+
         }
         public int Get(int key)
         {

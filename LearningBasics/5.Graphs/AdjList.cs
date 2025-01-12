@@ -8,6 +8,7 @@ using System.Globalization;
 using System.Linq;
 using System.Net.Quic;
 using System.Runtime.CompilerServices;
+using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
@@ -47,27 +48,27 @@ namespace LearningBasics._5.Graphs
             }
             return adjList;
         }
-        public Dictionary<string, List<string>> BuidAdjList()
+        public Dictionary<string, List<string>> BuildAdjP()
         {
             Dictionary<string, List<string>> adjList = new();
-            string[][] edges = { ["A", "B"], ["B", "C"], ["C", "D"], ["D", "E"], };
+            string[][] edges = { ["A", "B"], ["C", "D"], ["B", "D"] };
 
             foreach (var edge in edges)
             {
-                string source = edge[0], dest = edge[1];
-
-                if (!adjList.ContainsKey(source))
+                string src = edge[0], dest = edge[1];
+                if (!adjList.ContainsKey(src))
                 {
-                    adjList.Add(source, new List<string>());
+                    adjList.Add(src, new List<string>());
                 }
                 if (!adjList.ContainsKey(dest))
                 {
                     adjList.Add(dest, new List<string>());
                 }
-                adjList[source].Add(dest);
+                adjList[src].Add(dest);
             }
             return adjList;
         }
+
 
         public int Dfs(string node, string target, Dictionary<string, List<string>> adjlist, HashSet<string> visit)
         {
@@ -80,17 +81,17 @@ namespace LearningBasics._5.Graphs
                 return 1;
             }
             int count = 0;
-            visit = new HashSet<string> { node };///this is wrong as it reset the visited has set. 
+            // visit = new HashSet<string> { node };///this is wrong as it reset the visited hashSet. 
+            visit.Add(node);
             foreach (string neighbor in adjlist[node])
             {
-                count = +Dfs(neighbor, target, adjlist, visit);
+                count += Dfs(neighbor, target, adjlist, visit);
             }
             visit.Remove(node);
             return count;
         }
-        public int DFS(string node, string target, Dictionary<string, List<string>> adjlist, HashSet<string> visited)
+        public int DFS(string node, String target, Dictionary<string, List<string>> adjlist, HashSet<string> visited)
         {
-
             if (visited.Contains(node))
             {
                 return 0;
@@ -107,6 +108,7 @@ namespace LearningBasics._5.Graphs
             }
             visited.Remove(node);
             return count;
+
         }
 
         public int BFS(string node, string target, Dictionary<string, List<string>> adjlist)
@@ -122,12 +124,14 @@ namespace LearningBasics._5.Graphs
                 int queueLength = queue.Count;
                 for (int i = 0; i < queueLength; i++)
                 {
-                    string current = queue.Peek();
-                    queue.Dequeue();
-                    if (current.Equals(target))
+                   // string current = queue.Peek();//this is extra for no reason 
+                    string current= queue.Dequeue();// need to remove from the queue and add it to the foreach to add in the next "level":
+                   
+                    if (current.Equals(target))// need to end the BFS once we found the length 
                     {
                         return length;
                     }
+                    //move through the "Level" of each neighbor to see if is added to the visited. if it has not then we makwe it so. 
                     foreach (var neighbor in adjlist[current])
                     {
                         if (!visit.Contains(neighbor))
@@ -144,25 +148,28 @@ namespace LearningBasics._5.Graphs
         public int BFSP(string node, string target, Dictionary<string, List<string>> adjList)
         {
             Queue<string> queue = new();
-            HashSet<string> visited = new();
+            HashSet<string> visisted = new();
             queue.Enqueue(node);
             visited.Add(node);
-            int length = 0;
+            int length = 1;
+
             while (queue.Any())
             {
                 for (int i = 0; i < queue.Count; i++)
                 {
-                    if (node==target)
+                    string current = queue.Dequeue();
+                    if (current == target)
                     {
                         return length;
                     }
-                    
-                    foreach (var neighbor in adjList[queue.Dequeue()])
+
+                    foreach (var neighbor in adjList[current])
                     {
-                        if (!visited.Contains(neighbor))
+
+                        if (!adjList.ContainsKey(neighbor))
                         {
                             queue.Enqueue(neighbor);
-                            visited.Add(node);
+                            visisted.Add(neighbor);
                         }
                     }
                 }
@@ -170,5 +177,7 @@ namespace LearningBasics._5.Graphs
             }
             return length;
         }
+
+
     }
 }

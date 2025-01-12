@@ -15,7 +15,7 @@ namespace LearningBasics._5.Graphs
         int[][] Grid = { [0, 0, 0, 0,], [1, 1, 0, 0], [0, 0, 0, 1], [0, 1, 0, 0,] };
         public BFS()
         {
-            Console.WriteLine(BFSP(Grid));
+            Console.WriteLine(BFSMethodP(Grid));
         }
         public int BFSMethod(int[][] grid)
         {
@@ -24,7 +24,7 @@ namespace LearningBasics._5.Graphs
 
             Queue<(int row, int col)> queue = new Queue<(int row, int col)>();
             queue.Enqueue((0, 0));
-            int length = 1;//why one because we are inserting 
+            int length = 1;//why one, because we are inserting 
             while (queue.Any())
             {
                 int size = queue.Count();
@@ -50,19 +50,18 @@ namespace LearningBasics._5.Graphs
             return -1;
         }
 
-
-        public int BFSP(int[][] grid)
+        public int BFSMethodP(int[][] grid)
         {
             int rowLength = grid.Length, colLength = grid[0].Length;
             Queue<(int row, int col)> queue = new();
             queue.Enqueue((0, 0));
-            int length = 1;
+            int length = 0;
             while (queue.Any())
             {
                 for (int i = 0; i < queue.Count; i++)
                 {
                     (int row, int col) = queue.Dequeue();
-                    if (Math.Min(row, col) < 0 || row == rowLength || col == colLength || grid[row][col] == 1)
+                    if (Math.Min(row, col) < 0 || row >= rowLength || col >= colLength || grid[row][col] == 1)
                     {
                         continue;
                     }
@@ -72,9 +71,9 @@ namespace LearningBasics._5.Graphs
                     }
                     grid[row][col] = 1;
                     queue.Enqueue((row - 1, col));
-                    queue.Enqueue((row, col + 1));
                     queue.Enqueue((row + 1, col));
                     queue.Enqueue((row, col - 1));
+                    queue.Enqueue((row, col + 1));
                 }
                 length++;
             }
@@ -83,4 +82,7 @@ namespace LearningBasics._5.Graphs
     }
 
 }
-
+// row < 0 (is correct) == is it out of bound to the far left, think to for left 
+// col < 0 (is correct) == is it out of bound to the very top, think to far up 
+// row >= rowLength== means we excted the length of the row ,think to far right  
+// col >= colLength== means we excted the length of the col , think to far down 

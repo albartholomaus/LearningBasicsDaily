@@ -1,8 +1,10 @@
-﻿using System;
+﻿using LearningBasics.BasicsOrBasics;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
+using System.Numerics;
 using System.Runtime.CompilerServices;
 using System.Runtime.Serialization.Formatters;
 using System.Text;
@@ -18,240 +20,106 @@ namespace LearningBasics.BasicAlgorthims
         {
             int[] nums = [6, 2, 4, 3, 1];
             aux = new int[nums.Length];
-            MergeSortP(nums, 0, nums.Length - 1);
+            MergeSortPriamry(nums, 0, nums.Length - 1);
 
             for (int i = 0; i < nums.Length; i++)
             {
                 Console.WriteLine(nums[i]);
             }
-        }
-        public static int[] MergeSorting(int[] array, int leftIndex, int rightIndex)
-        {
-            if (leftIndex < rightIndex)
-            {
-                int middleIndex = (leftIndex + rightIndex) / 2;
-                MergeSorting(array, leftIndex, middleIndex);
-                MergeSorting(array, middleIndex + 1, rightIndex);
-                Merge(array, leftIndex, middleIndex, rightIndex);
-            }
-            return array;
-        }
-        private static void Merge(int[] array, int leftIndex, int middleIndex, int rightIndex)
-        {
-            //find the length of the 2 sub arrays
-            int leftLength = middleIndex - leftIndex + 1;
-            int rightLength = rightIndex - middleIndex;
-
-            var tempLeft = new int[leftLength];
-            var tempRight = new int[rightLength];
-            //copy the sorted left and right half's to temp array
-            for (int a = 0; a < leftLength; a++)
-            {
-                tempLeft[a] = array[leftIndex + a];
-            }
-            for (int b = 0; b < rightLength; b++)
-            {
-                tempRight[b] = array[middleIndex + 1 + b];
-            }
-            int i = 0;
-            int j = 0;
-            int k = 1;
-            //merge the 2 sorted halfs into the original array 
-            while (i < leftIndex && j < rightIndex)
-            {
-                if (tempLeft[i] <= tempRight[j])
-                {
-                    array[k] = tempLeft[i];
-                    i++;
-                }
-                else
-                {
-                    array[k] = tempRight[j];
-                    j++;
-                }
-                k++;
-            }
-            // to copy over the rest if needed 
-            while (i < leftLength)
-            {
-                array[k] = tempLeft[i];
-                i++;
-                k++;
-            }
-
-            while (j < rightLength)
-            {
-                array[k] = tempLeft[j];
-                i++;
-                k++;
-            }
+            Console.ReadKey();
         }
 
-        public void MergeSorting1(int[] array, int leftIndex, int rightIndex)
+        public void MergeSortPriamry(int[] array, int leftIndex, int rightIndex)
         {
-            //for base case:
-            // end -start +1 <=1 would also work here 
-            if (leftIndex >= rightIndex) return;
+            if (leftIndex >= rightIndex) return;// for obvious reasons the left needs to be greater then the right for this if statement to return, if left Index is greater we have hit the lowest limt of a split 
 
             int middleIndex = (leftIndex + rightIndex) / 2;
-            MergeSorting1(array, leftIndex, middleIndex);
-            MergeSorting1(array, middleIndex + 1, rightIndex);
-            Merge1(array, leftIndex, middleIndex, rightIndex);
+            MergeSortPriamry(array, leftIndex, middleIndex);
+            MergeSortPriamry(array, middleIndex + 1, rightIndex);
+            MergePriamry(array, leftIndex, middleIndex, rightIndex);
+
 
         }
-        public void Merge1(int[] array, int leftIndex, int middleIndex, int rightIndex)
+        private void MergePriamry(int[] array, int leftIndex, int middleIndex, int rightIndex)
         {
-            //copy to temp the indexes we are using;
+            //A temporary array temp is created to hold a copy of the segment of array being merged (from leftIndex to rightIndex).
+            //his ensures that the original array can be modified during the merging process without losing access to the original values.
+            int[] temp = new int[array.Length];
 
             for (int k = leftIndex; k <= rightIndex; k++)
             {
-                aux[k] = array[k];
+                temp[k] = array[k];
             }
 
-            //create pointers middle is +1;
+            //i points to the current position in the left subarray (temp[leftIndex] to temp[middleIndex]).
+            //j points to the current position in the right subarray(temp[middleIndex + 1] to temp[rightIndex]).
+            //k is for the index of the "main array" while i is for the first half and j is for the second half 
             int i = leftIndex, j = middleIndex + 1;
 
-            //loop through the indexes 
+            //This loop processes the entire range of leftIndex to rightIndex in the main array.
             for (int k = leftIndex; k <= rightIndex; k++)
             {
-                //move left side over 
+                //If all elements of the left subarray have been merged, take the remaining elements from the right subarray (temp[j]).the "left subarray" meaing the MAIN array
                 if (i > middleIndex)
                 {
-                    array[k] = aux[j++];
-
+                    array[k] = temp[j++];
                 }
-                //move right side over 
+                //If all elements of the right subarray have been merged, take the remaining elements from the left subarray (temp[i]).the "right subarray" is meaning the temp array
                 else if (j > rightIndex)
                 {
-                    array[k] = aux[i++];
+                    array[k] = temp[i++];
                 }
-                //check for which on is greater them move it to array 
-                else if (aux[i] > aux[j])
+                //Compare the current elements from both subarrays:If the element in the right subarray (temp[j]) is smaller, take it and increment j.
+                else if (temp[i] > temp[j])
                 {
-                    array[k] = aux[j++];
+                    array[k] = temp[j++];
                 }
+                //Otherwise, take the element from the left subarray (temp[i]) and increment i.
                 else
                 {
-                    array[k] = aux[i++];
-                }
-            }
-        }
-        public void MergeSorting2(int[] array, int leftIndex, int rightIndex)
-        {
-
-            //we have a global variable 
-
-            //for base case:
-            // end -start +1 <=1 would also work here 
-
-
-            // set middle 
-            //recursive 
-
-            //merge
-
-        }
-
-        public void Merge2(int[] array, int leftIndex, int middleIndex, int rightIndex)
-        {
-            //copy to temp the indexes we are using;
-
-            //create pointers middle is +1;
-
-
-            //loop through the indexes 
-
-            //move left side over k<-J
-
-            //move right side over k<-I
-
-            //check for which on is greater them move it to array i-J
-
-            //I don't know edge case maybe 
-
-
-        }
-        public void MergeSorting3(int[] array, int leftIndex, int rightIndex)
-        {
-            //we have a global variable 
-            //for base case:
-            if (leftIndex >= rightIndex) return;
-            int middleIndex = (leftIndex + rightIndex) / 2;
-            MergeSorting3(array, leftIndex, middleIndex);
-            MergeSorting3(array, middleIndex + 1, rightIndex);
-            Merge3(array, leftIndex, middleIndex, rightIndex);
-        }
-        public void Merge3(int[] array, int leftIndex, int middleIndex, int rightIndex)
-        {
-            for (int k = leftIndex; k <= rightIndex; k++)
-            {
-                aux[k] = array[k];
-            }
-
-            int i = leftIndex, j = middleIndex + 1;
-
-            for (int k = leftIndex; k <= rightIndex; k++)
-            {
-                if (i > middleIndex)
-                {
-                    array[k] = aux[j++];
-                }
-                else if (j > rightIndex)
-                {
-                    array[k] = aux[i++];
-                }
-                else if (aux[i] > aux[j])
-                {
-                    array[k] = aux[j++];
-                }
-                else
-                {
-                    array[k] = aux[i++];
+                    array[k] = temp[i++];
                 }
             }
         }
 
-        public void MergeSortP(int[] array, int leftIndex, int rightIndex)
+        public void MergeSortP(int[] array, int LeftIndex, int rightIndex)
         {
-            if (leftIndex >= rightIndex)
-            {
-                return;
-            }
-            int middleIndex = (leftIndex + rightIndex) / 2;
-            MergeSortP(array, leftIndex, middleIndex);
+            if (LeftIndex >= rightIndex) return;
+            int middleIndex = (LeftIndex + rightIndex) / 2;
+            MergeSortP(array, LeftIndex, middleIndex);
             MergeSortP(array, middleIndex + 1, rightIndex);
-            MergeP(array, leftIndex, middleIndex, rightIndex);
+            MergeP(array, LeftIndex, middleIndex, rightIndex);
         }
-        public void MergeP(int[] array, int leftIndex, int middleIndex, int RightIndex)
+
+        private void MergeP(int[] array, int leftIndex, int middleIndex, int rightIndex)
         {
-              int[] aux=new int[RightIndex+1];
-
-
-            for (int K = leftIndex; K <= RightIndex; K++)
+            int[] temp = new int[array.Length];
+            for (int currentIndex = leftIndex; currentIndex < rightIndex; currentIndex++)
             {
-                aux[K] = array[K];
+                temp[currentIndex] = array[currentIndex];
             }
-            int leftPointer = leftIndex, MiddlePointer = middleIndex + 1;
-            for (int k = leftIndex; k <= RightIndex; k++)
+            int lowerHalfIndex = middleIndex, upperHalfIndex = middleIndex + 1;
+            for (int currentIndex = leftIndex; currentIndex < rightIndex; currentIndex++)
             {
-                if (leftPointer > middleIndex)
+                if (lowerHalfIndex > middleIndex)
                 {
-                    array[k] = aux[MiddlePointer++];
+                    array[currentIndex] = temp[upperHalfIndex++];
                 }
-                else if (MiddlePointer > RightIndex)
+                else if (upperHalfIndex > middleIndex)
                 {
-                    array[k] = aux[leftPointer++];
+                    array[currentIndex] = temp[lowerHalfIndex++];
                 }
-                else if (aux[leftPointer] > aux[MiddlePointer])
+                else if (temp[lowerHalfIndex] > temp[upperHalfIndex])
                 {
-                    array[k] = array[MiddlePointer++];
+                    array[currentIndex] = temp[upperHalfIndex++];
                 }
                 else
                 {
-                    array[k] = aux[leftPointer++];
+                    array[currentIndex] = temp[lowerHalfIndex++];
                 }
             }
         }
+
     }
 }
 //left == left limit 
