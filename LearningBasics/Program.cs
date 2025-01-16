@@ -3,6 +3,7 @@ using LearningBasics._1.BasicsOrBasics._2.LinkedList;
 using LearningBasics._1.BasicsOrBasics._3.Hash;
 using LearningBasics._1.BasicsOrBasics.Heap;
 using LearningBasics._3.TopAlgorithm;
+using LearningBasics._6.DynamicProgramming;
 using LearningBasics.BasicAlgorthims;
 using LearningBasics.BasicsOrBasics.Hash;
 using LearningBasics.BasicsOrBasics.LinkedList;
@@ -10,5 +11,5 @@ using LearningBasics.PatternPractice.AbstractFactory;
 using LearningBasics.Patterns.Creational.Abstract_Factory;
 
 
-HeapPractice coding = new();
+DynamicProgramming coding = new();
 

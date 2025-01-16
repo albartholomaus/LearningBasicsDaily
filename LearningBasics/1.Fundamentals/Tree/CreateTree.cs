@@ -49,6 +49,7 @@ namespace LearningBasics.BasicsOrBasics.Tree
             }
             return root;
         }
+
         public TreeNode InsertP(TreeNode root, int value)
         {
             if (root == null)
