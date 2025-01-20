@@ -11,5 +11,5 @@ using LearningBasics.PatternPractice.AbstractFactory;
 using LearningBasics.Patterns.Creational.Abstract_Factory;
 
 
-DynamicProgramming coding = new();
+TwoDimensionalDynamicProgramming coding = new();
 
