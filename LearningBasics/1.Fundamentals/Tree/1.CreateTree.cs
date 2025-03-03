@@ -56,11 +56,11 @@ namespace LearningBasics.BasicsOrBasics.Tree
             {
                 return new TreeNode(value);
             }
-            if (value < root.value)
+            if (root.value < value)
             {
                 root.left = InsertP(root.left, value);
             }
-            else if (value > root.value)
+            else if (root.value > value)
             {
                 root.right = InsertP(root.right, value);
             }
@@ -112,13 +112,13 @@ namespace LearningBasics.BasicsOrBasics.Tree
             {
                 return null;
             }
-            if (value < root.value)
+            if (root.value < value)
             {
-                root.left = RemoveP(root.left, value);
+                root.left = InsertP(root.left, value);
             }
-            else if (value > root.value)
+            else if (root.value > value)
             {
-                root.right = RemoveP(root.right, value);
+                root.right = InsertP(root.right, value);
             }
             else
             {
@@ -126,20 +126,20 @@ namespace LearningBasics.BasicsOrBasics.Tree
                 {
                     return root.right;
                 }
-
                 if (root.right == null)
                 {
                     return root.left;
                 }
                 else
                 {
-                    TreeNode minNode = FindMindNodeP(root.right);
+                    TreeNode minNode = MinValueNodeP(root.right);
                     root.value = minNode.value;
-                    root.right = RemoveP(root.right, minNode.value);
+                    root.right = RemoveP(root.right,minNode.value);
                 }
             }
             return root;
         }
+
         private TreeNode MinValueNodeP(TreeNode root)
         {
             while (root.left != null && root != null)
@@ -149,7 +149,7 @@ namespace LearningBasics.BasicsOrBasics.Tree
             return root;
         }
 
-        private TreeNode FindMindNodeP(TreeNode root)
+        private TreeNode MinValueNode(TreeNode root)
         {
             while (root.left != null && root != null)
             {
@@ -157,6 +157,7 @@ namespace LearningBasics.BasicsOrBasics.Tree
             }
             return root;
         }
+
 
         public bool SearchTree(TreeNode root, int target)
         {
@@ -177,25 +178,23 @@ namespace LearningBasics.BasicsOrBasics.Tree
                 return true;
             }
         }
-
-        public bool SearchTreeP(TreeNode root, int target)
+        public bool SearchTreeP(TreeNode root, int value )
         {
-
-            if (root == null)
+            if (root.value == value)
             {
-                return false;
+                return true;
             }
-            else if (target < root.value)
+            if (root.value < value)
             {
-                return SearchTreeP(root.left, target);
+                SearchTreeP(root.left, value);
             }
-            else if (target > root.value)
+            else if (root.value > value)
             {
-                return SearchTreeP(root.right, target);
+                SearchTreeP(root.right, value);
             }
-            else return true;
-
+            return false;
         }
+
 
     }
 }

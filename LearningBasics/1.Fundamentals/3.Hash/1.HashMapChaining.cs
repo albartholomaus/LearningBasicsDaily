@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LearningBasics.BasicsOrBasics.Hash;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.NetworkInformation;
@@ -44,16 +45,19 @@ namespace LearningBasics._1.BasicsOrBasics._3.Hash
         }
         public void PutP(int key, int value)
         {
-            ChainingNode current = hashMap[key%hashMap.Length];
-            while (current!=null)
+
+            ChainingNode current = hashMap[key % hashMap.Length];
+
+            while (current != null)
             {
-                if (current.Next== null)
+                if (current.Next == null)
                 {
-                    current = new ChainingNode(value);
+                    current.Next = new ChainingNode(key, value);
                     return;
                 }
                 current = current.Next;
             }
+
         }
 
 
@@ -83,18 +87,19 @@ namespace LearningBasics._1.BasicsOrBasics._3.Hash
                 current = current.Next;
             }
         }
-        public void GetP(int key, int value)
+        public int GetP(int key, int value)
         {
             ChainingNode current = hashMap[key % hashMap.Length];
+
             while (current != null)
             {
                 if (current.Value == value)
                 {
-                    Console.WriteLine("Found");
-                    return;
+                    return value;
                 }
                 current = current.Next;
             }
+            return -1;
         }
 
         public void Remove(int key, int value = 0)
@@ -123,28 +128,29 @@ namespace LearningBasics._1.BasicsOrBasics._3.Hash
             }
         }
 
-        public void RemoveP(int key, int value)
+        public void RemoveP(int key, int value = 0)
         {
             ChainingNode current = hashMap[key % hashMap.Length];
-            ChainingNode prev=null;
+            ChainingNode prev = null;
+
             while (current != null)
             {
-                
-                if (current.Value==value)
+                if (current.Value == value)
                 {
-                    if (prev==null)
+                    if (prev == null)
                     {
                         hashMap[key % hashMap.Length] = current.Next;
                     }
                     else
                     {
                         prev.Next = current.Next;
-
                     }
+                    break;
                 }
                 prev = current;
                 current = current.Next;
             }
+
 
         }
 

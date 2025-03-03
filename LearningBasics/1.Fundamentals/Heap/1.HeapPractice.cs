@@ -46,17 +46,18 @@ namespace LearningBasics._1.BasicsOrBasics.Heap
         }
         public void HeapifyP(List<int> array)
         {
-            array.Add(int.MinValue);
+            array.Add(array[0]);
             heap = array;
-            int current = (heap.Count - 1) / 2;
+            int current = (array.Count - 1);
             while (current > 0)
             {
-                heapSwapP(current);
+                int i = current;
+                HeapSwap(i);
                 current--;
             }
         }
 
- 
+
 
         public void Push(int value)
         {
@@ -77,18 +78,14 @@ namespace LearningBasics._1.BasicsOrBasics.Heap
         }
         public void PushP(int value)
         {
-            if (heap.Count < 1)
-            {
-                heap.Add(int.MinValue);
-            }
             heap.Add(value);
-            int current = heap.Count - 1;
-            while (current > 1 && heap[current] < heap[current / 2])
+            int i = heap.Count - 1;
+            while (i > 1 && heap[i] < heap[i / 2])
             {
-                current = SwapP(current, current / 2);
+                SwapP(i, i / 2);
             }
-        }
 
+        }
 
         public int Pop()
         {
@@ -109,27 +106,27 @@ namespace LearningBasics._1.BasicsOrBasics.Heap
             HeapSwap();//not passing any value here as it is going to pop the top
             return result;
         }
+
         public int PopP()
         {
-            int result = 0;
-            if (heap.Count < 1)
+            int result;
+            if (heap.Count == 1)
             {
-                return result - 1;
+                return -1;
             }
             if (heap.Count == 2)
             {
                 result = heap[1];
-                heap.RemoveAt(1);
+                heap.RemoveAt(heap.Count - 1);
+                HeapSwapP();
                 return result;
             }
             result = heap[1];
-            heap[1] = heap[heap.Count - 1];
-            heap.RemoveAt(heap.Count - 1);
-            heapSwapP();
+            heap[1] = heap[heap.Count-1];
+            heap.RemoveAt(heap.Count-1);
+            HeapSwapP();
             return result;
-
         }
-
 
         public void HeapSwap(int i = 1)
         {
@@ -159,25 +156,20 @@ namespace LearningBasics._1.BasicsOrBasics.Heap
                 }
             }
         }
-        private void heapSwapP(int current = 1)
+        public void HeapSwapP(int i = 1)
         {
-            while (2 * current < heap.Count)
+            while (2 * i < heap.Count)
             {
-                if (2 * current + 1 < heap.Count && heap[2 * current + 1] < heap[2 * current] && heap[current] > heap[2 * current + 1])
+                if (2 * i + 1 < heap.Count && heap[2 * i + 1] < heap[2 * i] && heap[i] > heap[2 * i + 1])
                 {
-                    current = SwapP(current, 2 * current + 1);
-                }
-                else if (heap[current] > heap[2 * current])
-                {
-                    current = SwapP(current, 2 * current);
+                    SwapP(i, 2 * i + 1);
                 }
                 else
                 {
-                    return;
+                    SwapP(i, 2 * i);
                 }
             }
         }
-
 
         private void Swap(int index, int MoveToIndex)
         {
@@ -186,12 +178,12 @@ namespace LearningBasics._1.BasicsOrBasics.Heap
             heap[MoveToIndex] = temp;
             index = MoveToIndex;
         }
-        private int SwapP(int current, int MovedIndex)
+        private void SwapP(int currentIndex, int swapIndex)
         {
-            int temp = heap[current];
-            heap[current] = heap[MovedIndex];
-            heap[MovedIndex] = temp;
-            return current = MovedIndex;
+            int temp = heap[currentIndex];
+            heap[currentIndex] = heap[swapIndex];
+            heap[swapIndex] = temp;
+            currentIndex = swapIndex;
         }
     }
 }

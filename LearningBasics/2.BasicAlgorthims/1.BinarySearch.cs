@@ -17,7 +17,7 @@ namespace LearningBasics.BasicAlgorthims
         public void Search()
         {
             int[] array = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-            BinarySearchP(array, 3);
+            BinSearchP(array, 3);
         }
 
 
@@ -46,31 +46,53 @@ namespace LearningBasics.BasicAlgorthims
             }
             return -1;
         }
-
-
-
-
-        private int BinarySearchP(int[] array, int target)
+        private int BinSearchP(int[] array, int target)
         {
             int left = 0;
-            int middle = 0;
-            int right = array.Length - 1;
-            while (left < right)
+            int right = array.Length;
+            int mid = 0;
+            while (left<right)
             {
-                 middle = (array.Length - 1) / 2;
-                if (target < array[middle])
+                mid = (left+right) / 2;
+                if (target < array[mid])
                 {
-                    middle = middle - 1;
+                    mid = right - 1;
                 }
-                if (target > array[middle])
+                if (target < array[mid])
                 {
-                    middle = middle + 1;
+                    mid = left + 1;
                 }
-                else return middle;
-               
+                else
+                {
+                    return mid;
+                }
+            }
+            return -1;
+
+        }
+        private int BinarySearchMethodP(int[] array, int target)
+        {
+            int leftIndex = 0, rightIndex = array.Length;
+            int mid = 0;
+            while (leftIndex < rightIndex)
+            {
+                mid = (leftIndex + rightIndex) / 2;
+                if (target < array[mid])
+                {
+                    rightIndex = mid - 1;
+                }
+                if (target > array[mid])
+                {
+                    rightIndex = mid + 1;
+                }
+                else
+                {
+                    return mid;
+                }
             }
             return -1;
         }
+
 
     }
 }

@@ -19,6 +19,7 @@ namespace LearningBasics.BasicsOrBasics.Hash
             Capacity = 2;
             Map = new HashPair[Capacity];
         }
+
         public int Hash(string key)
         {
             int index = 0;
@@ -125,10 +126,9 @@ namespace LearningBasics.BasicsOrBasics.Hash
         }
         public void PutP(string key, string value)
         {
-
+        
         }
-
-
+        
         public void Remove(string key)
         {
             if (Get(key) == null)
@@ -148,7 +148,9 @@ namespace LearningBasics.BasicsOrBasics.Hash
                 index %= Capacity;
             }
         }
-       
+        public void RemoveP(string key)
+        { }
+
         public void Print()
         {
             foreach (var pair in Map)
@@ -159,10 +161,7 @@ namespace LearningBasics.BasicsOrBasics.Hash
                 }
             }
         }
-        public void PrintP()
-        {
-
-        }
+      
     }
     public class HashPair
     {

@@ -66,32 +66,6 @@ namespace LearningBasics.BasicAlgorthims
             /* for the pivot swap the reason it is not in the middle(in my case) is because that is were we put the pivot*/
         }
 
-        public static int[] QuickSortingTemplate(int[] array, int start, int end)
-        {
-            //terminator
-
-            //need to set pivot 
-
-
-            //need to set start 
-
-            //loop through with a temp variable to make sure 
-
-            //set temp 
-
-            //current to left 
-
-            //move tempt to current
-
-            //need to up data left 
-
-            //move pivot in-between left side being the  and right 
-
-            //recursive calls 
-            return array;
-        }
-
-
         public int[] QSortEndStart(int[] array, int start, int end)
         {
             if (end - start + 1 <= 1)
@@ -116,11 +90,13 @@ namespace LearningBasics.BasicAlgorthims
             QSortEndStart(array, SmallerThenPivotIndex + 1, end);
             return array;
         }
+
         public int[] QSortMedian(int[] array, int start, int end)
         {
             if (end - start + 1 <= 1) return array;
 
             int left = start;
+
             int mid = start + (end - start) / 2;
             int pivot = Median(array[start], array[mid], array[end]);
 
@@ -137,41 +113,49 @@ namespace LearningBasics.BasicAlgorthims
             }
             array[Array.IndexOf(array, pivot)] = array[left];
             array[left] = pivot;
+
             QSortMedian(array, start, left - 1);
             QSortMedian(array, left + 1, end);
+
             return array;
         }
-
-
-        private int Median(int a, int b, int c)
+        public int[] QsortP(int[] array, int start, int end)
         {
-            if ((a > b) == (a < c)) return a;
-            if ((b > a) == (b < c)) return a;
-            return c;
+            if (end - start + 1 <= 1) return array;
 
-        }
-
-        public int[] QuickSortP(int[] array, int start, int end)
-        {
-            if (end - start + 1 < 1)
-            {
-                return array;
-            }
             int left = start;
-            int pivot = array[array.Length - 1];
-            for (int i = start; i < end; i++)
+            int mid = (end + start) / 2;
+            int piviot = MedianP(array[start], array[mid], array[end]);
+
+            for (int i = start; i <= end; i++)
             {
                 int temp = array[i];
                 array[i] = array[left];
                 array[left] = temp;
                 left++;
             }
-            array[end] = array[left];
-            array[left] = pivot;
-            QuickSortP(array, start, left - 1);
-            QuickSortP(array, left + 1, end);
+            array[Array.IndexOf(array, piviot)] = array[left];
+            array[left] = piviot;
+            QsortP(array, start, left - 1);
+            QsortP(array, left + 1, end);
             return array;
         }
+
+        private int Median(int a, int b, int c)
+        {
+            if ((a > b) == (a < c)) return a;
+            if ((b > a) == (b < c)) return b;
+            return c;
+        }
+
+
+        private int MedianP(int a, int b, int c)
+        {
+            if ((a > b) == (a < c)) return a;
+            if ((b > a) == (b < c)) return b;
+            return c;
+        }
+
 
     }
 }

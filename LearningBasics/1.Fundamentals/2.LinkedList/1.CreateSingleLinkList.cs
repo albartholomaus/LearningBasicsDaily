@@ -13,6 +13,7 @@ namespace LearningBasics.BasicsOrBasics.LinkedList
     {
         public SingleLinkedListCreate()
         {
+            CreateListPp();
             Node firstList = CreateListP();
             Node secondList = CreateList();
             ReverseListP(secondList);
@@ -61,6 +62,19 @@ namespace LearningBasics.BasicsOrBasics.LinkedList
             }
             return returnNode;
         }
+        public Node CreateListPp()
+        {
+            Node current = new(0);
+            Node Return = current;
+
+            for (int i = 1; i < 5; i++)
+            {
+                Node temp = new Node(i);
+                current.Next = temp;
+                current = current.Next;
+            }
+            return Return;
+        }
 
         public Node ReverseList(Node head)
         {
@@ -79,16 +93,17 @@ namespace LearningBasics.BasicsOrBasics.LinkedList
         }
         public Node ReverseListP(Node head)
         {
+            Node temp = null;
+            Node prev = null;
             Node current = head;
-            Node previous = null;
-            while (current != null)
+            while (current!=null)
             {
-                Node Next = current.Next;
-                current.Next = previous;
-                previous = current;
-                current = Next;
+                temp = current.Next;
+                current.Next = prev;
+                prev = current;
+                current = temp;
             }
-            return previous;
+            return prev;
         }
 
         public Node MergeTwoLists(Node list1, Node list2)
@@ -126,9 +141,9 @@ namespace LearningBasics.BasicsOrBasics.LinkedList
             Node Temp = new();
             Node returnNode = Temp;
 
-            while (list1 != null && list2!=null)
+            while (list1 != null && list2 != null)
             {
-                if (list1.Value<list2.Value)
+                if (list1.Value < list2.Value)
                 {
                     Temp = list1;
                     list1 = list1.Next;
@@ -140,7 +155,7 @@ namespace LearningBasics.BasicsOrBasics.LinkedList
                 }
                 Temp = Temp.Next;
             }
-            if (list1!=null)
+            if (list1 != null)
             {
                 Temp = list1;
             }

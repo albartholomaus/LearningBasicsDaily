@@ -37,8 +37,6 @@ namespace LearningBasics.BasicAlgorthims
             MergeSortPriamry(array, leftIndex, middleIndex);
             MergeSortPriamry(array, middleIndex + 1, rightIndex);
             MergePriamry(array, leftIndex, middleIndex, rightIndex);
-
-
         }
         private void MergePriamry(int[] array, int leftIndex, int middleIndex, int rightIndex)
         {
@@ -51,9 +49,9 @@ namespace LearningBasics.BasicAlgorthims
                 temp[k] = array[k];
             }
 
-            //i points to the current position in the left subarray (temp[leftIndex] to temp[middleIndex]).
-            //j points to the current position in the right subarray(temp[middleIndex + 1] to temp[rightIndex]).
-            //k is for the index of the "main array" while i is for the first half and j is for the second half 
+            //i points to the start of the current position in the left subarray (temp[leftIndex] to temp[middleIndex]).
+            //j points to the start of the current position in the right subarray(temp[middleIndex + 1] to temp[rightIndex]).
+            //k is for the index of the "main array" of where we are merging the 2 sub arrays.summery: i is for the first half and j is for the second half 
             int i = leftIndex, j = middleIndex + 1;
 
             //This loop processes the entire range of leftIndex to rightIndex in the main array.
@@ -81,42 +79,47 @@ namespace LearningBasics.BasicAlgorthims
                 }
             }
         }
-
-        public void MergeSortP(int[] array, int LeftIndex, int rightIndex)
+        
+        public void MergeSortP(int[] arr, int leftIndex, int rightIndex)
         {
-            if (LeftIndex >= rightIndex) return;
-            int middleIndex = (LeftIndex + rightIndex) / 2;
-            MergeSortP(array, LeftIndex, middleIndex);
-            MergeSortP(array, middleIndex + 1, rightIndex);
-            MergeP(array, LeftIndex, middleIndex, rightIndex);
-        }
-
-        private void MergeP(int[] array, int leftIndex, int middleIndex, int rightIndex)
-        {
-            int[] temp = new int[array.Length];
-            for (int currentIndex = leftIndex; currentIndex < rightIndex; currentIndex++)
+            if (leftIndex >= rightIndex)
             {
-                temp[currentIndex] = array[currentIndex];
+                return;
             }
-            int lowerHalfIndex = middleIndex, upperHalfIndex = middleIndex + 1;
-            for (int currentIndex = leftIndex; currentIndex < rightIndex; currentIndex++)
+            int middleIndex = (leftIndex + rightIndex) / 2;
+            MergeSortP(arr, leftIndex, middleIndex);
+            MergeSortP(arr, middleIndex + 1, rightIndex);
+            MergeP(arr, leftIndex, middleIndex, rightIndex);
+
+        }
+        private void MergeP(int[] arr, int leftIndex, int middleIndex, int rightIndex)
+        {
+            int[] temp = new int[arr.Length];
+            for (int k = 0; k < arr.Length; k++)
             {
-                if (lowerHalfIndex > middleIndex)
+                temp[k] = temp[k];
+            }
+            int i = leftIndex;
+            int j = middleIndex + 1;
+            for (int k = leftIndex; k <= rightIndex; k++)
+            {
+                if (i > middleIndex)
                 {
-                    array[currentIndex] = temp[upperHalfIndex++];
+                    arr[k] = temp[j++];
                 }
-                else if (upperHalfIndex > middleIndex)
+                else if (j < rightIndex)
                 {
-                    array[currentIndex] = temp[lowerHalfIndex++];
+                    arr[k] = temp[i++];
                 }
-                else if (temp[lowerHalfIndex] > temp[upperHalfIndex])
+                else if (temp[i] > temp[j])
                 {
-                    array[currentIndex] = temp[upperHalfIndex++];
+                    arr[k] = temp[j++];
                 }
                 else
                 {
-                    array[currentIndex] = temp[lowerHalfIndex++];
+                    arr[k] = temp[i++];
                 }
+
             }
         }
 
