@@ -27,7 +27,7 @@ char[][] board = new char[][]
 }; 
 
 int[] nums = [2, 3, 4, 10, 3, 4, 5,6];
-
-Solution.LongestConsecutive(nums);
+string strings = "tab a cat";
+_2pointer.IsPalindrome(strings);
 
 
