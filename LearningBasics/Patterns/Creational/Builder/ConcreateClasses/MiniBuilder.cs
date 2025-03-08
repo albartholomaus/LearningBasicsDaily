@@ -18,12 +18,12 @@ namespace LearningBasics.Patterns.Creational.Builder.ConcreateClasses
 
         public override void BuildEngine()
         {
-            Car.AddPart("V8");
+            
         }
 
         public override void BuildFrame()
         {
-            Car.AddPart("2 Door");
+         
         }
     }
 }

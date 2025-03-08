@@ -27,7 +27,7 @@ namespace LearningBasics._6.DynamicProgramming
             return BruteForceFib(n - 1) + BruteForceFib(n - 2);
         }
         //top down
-        public int Memoization(int n, int[] cache )// the array needs to be + 1 to the number you are attempting to solve for. while it takes additional space.. 
+        public int Memoization(int n, int[] cache )// the array needs to be + 1 to the number you are attempting to solve for. while it takes additional space. 
         {
             // base case, when we hit 1 or less we need to return
             if (n <= 1)
@@ -41,7 +41,7 @@ namespace LearningBasics._6.DynamicProgramming
             cache[n] = Memoization(n - 1, cache) + Memoization(n - 2,cache);
             return cache[n];
         }
-        //this is the same but with out the recrusion. bottom up
+        //this is the same but with out the recursion: bottom up
         public int DpBottomUp(int n)
         {
             //if statement here is for exceptions 
@@ -49,7 +49,7 @@ namespace LearningBasics._6.DynamicProgramming
             {
                 return n;
             }
-            // creating storage for the 2 variables that we needs to use to store 2 numnbers to calculate the fibinachie sequance. 
+            //creating storage for the 2 variables that we needs to use to store 2 numbers to calculate the Fibonacci sequence. 
             int[] cache = [0, 1];
             //this is a stating point, we already have the fist 2 numbers and we can start from there. 
             int i = 2;
@@ -57,7 +57,7 @@ namespace LearningBasics._6.DynamicProgramming
             {
                 //storing it for the later move. 
                 int temp = cache[1];
-                //calculating the next number in the sequance. 
+                //calculating the next number in the sequence. 
                 cache[1] = cache[1] + cache[2];
                 //moving to the old number. 
                 cache[0] = temp;
@@ -67,14 +67,14 @@ namespace LearningBasics._6.DynamicProgramming
         }
 
         //number = 5, times = 5
-        public int MultiplyUsingRecrusion(int number, int times)
+        public int MultiplyUsingRecursion(int number, int times)
         {
             if (times <= 1)
             {
                 return number;
             }
 
-            return number += MultiplyUsingRecrusion(number, times - 1);
+            return number += MultiplyUsingRecursion(number, times - 1);
         }
     }
 
