@@ -17,7 +17,7 @@ namespace LearningBasics.BasicAlgorthims
         public void Search()
         {
             int[] array = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-            BinSearchP(array, 3);
+
         }
 
 
@@ -46,30 +46,7 @@ namespace LearningBasics.BasicAlgorthims
             }
             return -1;
         }
-        private int BinSearchP(int[] array, int target)
-        {
-            int left = 0;
-            int right = array.Length;
-            int mid = 0;
-            while (left<right)
-            {
-                mid = (left+right) / 2;
-                if (target < array[mid])
-                {
-                    mid = right - 1;
-                }
-                if (target < array[mid])
-                {
-                    mid = left + 1;
-                }
-                else
-                {
-                    return mid;
-                }
-            }
-            return -1;
-
-        }
+      
         private int BinarySearchMethodP(int[] array, int target)
         {
             int leftIndex = 0, rightIndex = array.Length;

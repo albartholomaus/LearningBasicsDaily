@@ -52,6 +52,10 @@ namespace LearningBasics.PracticePlace
 
             while (leftPointer < rightPointer)
             {
+                if (numbers[leftPointer] + numbers[rightPointer] == target)
+                {
+                    return new int[] { leftPointer + 1, rightPointer + 1 };
+                }
 
                 if (numbers[leftPointer] + numbers[rightPointer] > target)
                 {
@@ -62,10 +66,7 @@ namespace LearningBasics.PracticePlace
                     leftPointer++;
                 }
 
-                if (numbers[leftPointer] + numbers[rightPointer] == target)
-                {
-                    return new int[] { leftPointer + 1, rightPointer + 1 };
-                }
+               
             }
             return new int[] { -1 };
         }
@@ -101,12 +102,39 @@ namespace LearningBasics.PracticePlace
                         {
                             leftPointer++;
                         }
-
                     }
                 }
             }
             return results;
         }
 
+        public static int MaxArea(int[] heights)
+        {
+            /* You are given an integer array heights where heights[i] represents the height of the ith bar.
+                You may choose any two bars to form a container. Return the maximum amount of water a container can store. */
+            //[1,7,2,5,4,7,3,6]
+            int leftPointer = 0;
+            int rightPointer = heights.Length - 1;
+            int area = 0;
+
+            int min = Math.Min(heights[leftPointer], heights[rightPointer]);
+            while (leftPointer < rightPointer)
+            {
+               int newArea = (rightPointer - leftPointer) * Math.Min(heights[leftPointer], heights[rightPointer]);
+
+                if (heights[leftPointer] <= heights[rightPointer])
+                {
+                    leftPointer++;
+                }
+                else
+                {
+                    rightPointer--;
+                }
+                area = Math.Max(area,newArea);
+            }
+            Console.WriteLine(area);
+            return area;
+
+        }
     }
 }
