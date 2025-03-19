@@ -19,7 +19,6 @@ namespace LearningBasics.PracticePlace
             {
                 if (left > right)
                 {
-
                     return true;
                 }
                 if (!char.IsLetterOrDigit(s[left]))
@@ -107,7 +106,6 @@ namespace LearningBasics.PracticePlace
             }
             return results;
         }
-
         public static int MaxArea(int[] heights)
         {
             /* You are given an integer array heights where heights[i] represents the height of the ith bar.
@@ -135,6 +133,18 @@ namespace LearningBasics.PracticePlace
             Console.WriteLine(area);
             return area;
 
+        }
+
+        public int MaxProfit(int[] prices)
+        {
+            int leftPointer = 0;
+            int rightPointer = 1;
+
+            for (int i = 0; i < prices.Length; i++)
+            {
+
+            }
+            return -1;
         }
     }
 }

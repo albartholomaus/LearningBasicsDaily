@@ -84,11 +84,33 @@ namespace LearningBasics.PracticePlace
                     leftPointer = middle + 1;
                 }
             }
-            return results ;
+            return results;
         }
-        public int FindMin(int[] nums)
+        public static int FindMin(int[] nums)
         {
-            return -1;
+            int leftIndex = 0;
+            int rightIndex = nums.Length - 1;
+            int result = nums[0];
+            while (leftIndex <= rightIndex)
+            {
+                if (nums[leftIndex] < nums[rightIndex])
+                {
+                    result = Math.Min(result, nums[leftIndex]);
+                    break;
+                }
+                int middleIndex = (leftIndex + rightIndex) / 2;
+                result = Math.Min(result, nums[middleIndex]);
+                if (nums[middleIndex] >= nums[leftIndex])
+                {
+                    leftIndex = middleIndex + 1;
+                }
+                else
+                {
+                    rightIndex = middleIndex - 1;
+                }
+            }
+            return result;
         }
+
     }
 }
