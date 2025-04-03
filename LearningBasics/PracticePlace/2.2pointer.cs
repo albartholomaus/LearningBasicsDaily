@@ -267,18 +267,39 @@ namespace LearningBasics.PracticePlace
         public static bool CheckInclusionOPT(string s1, string s2)
         {
             Dictionary<char, int> count1 = new();
-            foreach (char c in s1)
+            foreach (char chrs in s1)
             {
-                if (count1.ContainsKey(c))  count1[c]++;
-                else count1[c]=1;   
+                if (count1.ContainsKey(chrs)) count1[chrs]++;
+                else count1[chrs] = 1;
             }
-            int need =count1.Count;
+            int need = count1.Count;
             for (int i = 0; i < s2.Length; i++)
             {
                 Dictionary<char, int> count2 = new();
                 int current = 0;
+                for (int j = 0; j < s2.Length; j++)
+                {
+                    char chrs = s2[j];
+                    if (count1.ContainsKey(chrs)) count1[chrs]++;
+                    else count1[chrs] = 1;
 
+                    if (!count1.ContainsKey(chrs) || count1[chrs] < count2[chrs])
+                    {
+                        break;
+                    }
+
+                    if (count1[chrs] == count2[chrs])
+                    {
+                        current++;
+                    }
+
+                    if (current == need)
+                    {
+                        return true;
+                    }
+                }
             }
+            return false;
         }
     }
 }
