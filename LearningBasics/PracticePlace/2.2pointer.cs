@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Linq;
 using System.Runtime.Intrinsics.X86;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -65,7 +67,7 @@ namespace LearningBasics.PracticePlace
                     leftPointer++;
                 }
 
-               
+
             }
             return new int[] { -1 };
         }
@@ -118,7 +120,7 @@ namespace LearningBasics.PracticePlace
             int min = Math.Min(heights[leftPointer], heights[rightPointer]);
             while (leftPointer < rightPointer)
             {
-               int newArea = (rightPointer - leftPointer) * Math.Min(heights[leftPointer], heights[rightPointer]);
+                int newArea = (rightPointer - leftPointer) * Math.Min(heights[leftPointer], heights[rightPointer]);
 
                 if (heights[leftPointer] <= heights[rightPointer])
                 {
@@ -128,23 +130,155 @@ namespace LearningBasics.PracticePlace
                 {
                     rightPointer--;
                 }
-                area = Math.Max(area,newArea);
+                area = Math.Max(area, newArea);
             }
             Console.WriteLine(area);
             return area;
 
         }
 
-        public int MaxProfit(int[] prices)
-        {
+        public static int MaxProfit(int[] prices)
+        {//[10,1,5,6,7,1]
             int leftPointer = 0;
             int rightPointer = 1;
-
-            for (int i = 0; i < prices.Length; i++)
+            int maxProfit = 0;
+            for (int i = 0; i < prices.Length - 1; i++)
             {
 
+                maxProfit = Math.Max(maxProfit, prices[rightPointer] - prices[leftPointer]);
+                if (prices[rightPointer] < prices[leftPointer])
+                {
+                    leftPointer = rightPointer;
+                    rightPointer++;
+                }
+                else
+                {
+                    rightPointer++;
+                }
             }
-            return -1;
+            return maxProfit;
+        }
+
+        public static int LengthOfLongestSubstring(string s = "abcabcbb")
+        {
+            Dictionary<char, int> map = new();
+            int leftPointer = 0, results = 0; ;
+
+            for (int rightPointer = 0; rightPointer < s.Length; rightPointer++)
+            {
+
+                if (map.ContainsKey(s[rightPointer]))
+                {
+                    leftPointer = Math.Max(leftPointer, map[s[rightPointer]] + 1);
+                    int test = map[s[rightPointer]] + 1;
+                }
+                map[s[rightPointer]] = rightPointer;
+                results = Math.Max(results, rightPointer - leftPointer + 1);
+            }
+            return results;
+        }
+
+        public static int CharacterReplacement(string s = "ABAB", int k = 2)
+        {
+            //sim has bad read ability 
+            int replaceNumber = k;
+            string str = s;
+
+            HashSet<char> charsSet = new(str);
+            int result = 0;
+
+            foreach (char chr in charsSet)
+            {
+                int countCurrentLetter = 0, leftPointer = 0;
+                for (int rightPointer = 0; rightPointer < s.Length; rightPointer++)
+                {
+                    if (s[rightPointer] == chr)
+                    {
+                        countCurrentLetter++;
+                    }
+                    while ((rightPointer - leftPointer + 1) - countCurrentLetter > replaceNumber)
+                    {
+                        if (str[leftPointer] == chr)
+                        {
+                            countCurrentLetter--;
+                        }
+                        leftPointer++;
+                    }
+                    result = Math.Max(result, rightPointer - leftPointer + 1);
+                }
+            }
+            return result;
+        }
+        public int CharacterReplacementOP(string s, int k)
+        {
+            int[] charCounts = new int[26];
+            int left = 0, maxCount = 0, maxLength = 0;
+
+            for (int right = 0; right < s.Length; right++)
+            {
+                charCounts[s[right] - 'A']++;
+                maxCount = Math.Max(maxCount, charCounts[s[right] - 'A']);
+
+                // If more than k characters need to be replaced, shrink window
+                if ((right - left + 1) - maxCount > k)
+                {
+                    charCounts[s[left] - 'A']--;
+                    left++;
+                }
+                maxLength = Math.Max(maxLength, right - left + 1);
+            }
+            return maxLength;
+        }
+        public static bool CheckInclusion(string s1, string s2)
+        {
+            if (s1.Length > s2.Length)
+            {
+                return false;
+            }
+            int[] s1Count = new int[26];
+            int[] s2Count = new int[26];
+            int left = 0;
+            for (int i = 0; i < s1.Length; i++)
+            {
+                s1Count[s1[i] - 'a']++;
+                s2Count[s2[i] - 'a']++;
+            }
+            int matches = 0;
+            for (int right = s1.Length; right < s2.Length; right++)
+            {
+                if (matches == 26)
+                {
+                    return true;
+                }
+                int index = s2[right] - 'a';
+                s2Count[index]++;
+                if (s1Count[index] == s2Count[index])
+                {
+                    matches++;
+                }
+                else if (s1Count[index] - 1 == s2Count[index])
+                {
+                    matches--;
+                }
+                left++;
+            }
+            return matches == 26;
+        }
+        public static bool CheckInclusionOPT(string s1, string s2)
+        {
+            Dictionary<char, int> count1 = new();
+            foreach (char c in s1)
+            {
+                if (count1.ContainsKey(c))  count1[c]++;
+                else count1[c]=1;   
+            }
+            int need =count1.Count;
+            for (int i = 0; i < s2.Length; i++)
+            {
+                Dictionary<char, int> count2 = new();
+                int current = 0;
+
+            }
         }
     }
 }
