@@ -272,16 +272,17 @@ namespace LearningBasics.PracticePlace
                 if (count1.ContainsKey(chrs)) count1[chrs]++;
                 else count1[chrs] = 1;
             }
-            int need = count1.Count;
+            int string1Length = count1.Count;
+
             for (int i = 0; i < s2.Length; i++)
             {
                 Dictionary<char, int> count2 = new();
-                int current = 0;
-                for (int j = 0; j < s2.Length; j++)
+                int String2Length = 0;
+                for (int j = i; j < s2.Length; j++)
                 {
                     char chrs = s2[j];
-                    if (count1.ContainsKey(chrs)) count1[chrs]++;
-                    else count1[chrs] = 1;
+                    if (count2.ContainsKey(chrs)) count2[chrs]++;
+                    else count2[chrs] = 1;
 
                     if (!count1.ContainsKey(chrs) || count1[chrs] < count2[chrs])
                     {
@@ -290,10 +291,10 @@ namespace LearningBasics.PracticePlace
 
                     if (count1[chrs] == count2[chrs])
                     {
-                        current++;
+                        String2Length++;
                     }
 
-                    if (current == need)
+                    if (String2Length == string1Length)
                     {
                         return true;
                     }

@@ -17,4 +17,4 @@ char[][] board = new char[][]
 };
 
 int[] prices = [10, 1, 5, 6, 7, 1];
-Console.WriteLine(_2pointer.CheckInclusion("abc", "lecabee"));
+Console.WriteLine(_2pointer.CheckInclusionOPT("abc", "lecabee"));
