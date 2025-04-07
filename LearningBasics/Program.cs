@@ -1,5 +1,6 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using LearningBasics.PracticePlace;
+using LearningBasics.PracticePlace.LinkedList;
 using System.Reflection;
 
 
@@ -16,5 +17,4 @@ char[][] board = new char[][]
     new char[] { '.', '.', '.', '.', '8', '.', '.', '7', '9' }
 };
 
-int[] prices = [10, 1, 5, 6, 7, 1];
-Console.WriteLine(_2pointer.CheckInclusionOPT("abc", "lecabee"));
+AddTwoNumbersClass LS = new();
