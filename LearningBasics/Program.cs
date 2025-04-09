@@ -17,4 +17,4 @@ char[][] board = new char[][]
     new char[] { '.', '.', '.', '.', '8', '.', '.', '7', '9' }
 };
 
-AddTwoNumbersClass LS = new();
+RemoveNth LS = new();
