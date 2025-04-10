@@ -17,4 +17,4 @@ char[][] board = new char[][]
     new char[] { '.', '.', '.', '.', '8', '.', '.', '7', '9' }
 };
 
-RemoveNth LS = new();
+RandomPointer LS = new();

@@ -24,7 +24,6 @@ namespace LearningBasics.PracticePlace.LinkedList
             while (current != null) { 
                 rightPointer++;
                 current = current.next;
-            
             }
 
             int removeIndex = rightPointer - n;
