@@ -15,15 +15,11 @@ namespace LearningBasics.PracticePlace.LinkedList
 
             Node start = CreateList();
             Node returnWithRandom = start;
-
-
             while (start != null)
             {
                 if (!toCopy.ContainsKey(start.val)) toCopy[start.val] = start;
                 start = start.next;
             }
-
-
             start = returnWithRandom;
 
             while (returnWithRandom != null)
@@ -63,21 +59,21 @@ namespace LearningBasics.PracticePlace.LinkedList
 
             while (current != null)
             {
-                Node copy = new Node(current.val);
-                if (!oldToCopy.ContainsKey(current)) oldToCopy[current] = copy;
+                oldToCopy[current] = new Node(current.val) ;
                 current = current.next;
             }
          
             current = head;
+
             while (current != null)
             {
                 Node copied = oldToCopy[current];
-                copied.next=;
-                copied.random
+                copied.next = current.next != null ? oldToCopy[current.next] : null;
+                copied.random = current.random != null ? oldToCopy[current.random] : null;
                 current = current.next;
             }
 
-            return head;
+            return head != null ? oldToCopy[head] : null;
         }
 
         private Node CreateList(int val = 1, int ListLength = 4)

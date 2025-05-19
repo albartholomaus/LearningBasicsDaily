@@ -21,9 +21,7 @@ namespace LearningBasics._5.Graphs
         HashSet<string> visited = new();
         public AdjList()
         {
-
             // Console.WriteLine(length);
-
         }
         public Dictionary<string, List<string>> BuildAdjlist()
         {

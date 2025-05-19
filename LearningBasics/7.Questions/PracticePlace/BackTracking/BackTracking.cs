@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LearningBasics.PracticePlace
+namespace LearningBasics.PracticePlace.BackTracking
 {
     public class BackTracking
     {

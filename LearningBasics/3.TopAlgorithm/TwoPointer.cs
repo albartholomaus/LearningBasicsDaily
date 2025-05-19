@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LearningBasics._3.TopAlgorithm
 {
-    internal class TwoPointer
+    public class TwoPointer
     {
     }
 }

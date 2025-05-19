@@ -69,7 +69,7 @@ namespace LearningBasics._6.DynamicProgramming
                     //adding to the current row, the previous index ([j+1] )and the row below( prevRow[j] )
                     curRow[j] = curRow[j + 1] + prevRow[j];
                 }
-                // moving the current calculationss into the previous row as it is no longer needed.
+                // moving the current calculations into the previous row as it is no longer needed.
                 prevRow = curRow;
             }
             return prevRow[0];
