@@ -9,7 +9,6 @@ namespace LearningBasics._7.Questions.PracticePlace.DP._6.DynamicProgramming
 {
     public class MaxSubArrayClass
     {
-      
         public int MaxSubArray(int[] nums)
         {
             int maxSum = nums[0], currentSum = 0;
