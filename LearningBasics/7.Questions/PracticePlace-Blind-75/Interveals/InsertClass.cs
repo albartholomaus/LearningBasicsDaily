@@ -18,27 +18,42 @@ namespace LearningBasics._7.Questions.PracticePlace.DP._6.DynamicProgramming
 
             CanAttendMeetings(theList);
             MinMeetingRooms(theList);
+
+
         }
 
         public int MinMeetingRooms(List<Interval> intervals)
         {
-            intervals.Sort((a, b) => a.start.CompareTo(b.start));
-            int previousIntervalEnd = 0;
-            int result = 1;
-            foreach (var interval in intervals)
-            {
-                int nextIntervalStart = interval.start;
-                int nextIntervalEnd = interval.end;
+            int[] start = new int[intervals.Count];
+            int[] end = new int[intervals.Count];
 
-                if (nextIntervalStart >= previousIntervalEnd)
+            for (int i = 0; i < intervals.Count; i++)
+            {
+                start[i] = intervals[i].start;
+            }
+            for (int i = 0; i < intervals.Count; i++)
+            {
+                end[i] = intervals[i].end;
+            }
+            int result = 0, count = 0;
+
+            Array.Sort(start);
+            Array.Sort(end);
+
+            int startTime = 0, endTime = 0;
+            while (startTime < start.Length)
+            {
+                if (start[startTime] < end[endTime])
                 {
-                    previousIntervalEnd = nextIntervalEnd;
+                    startTime++;
+                    count++;
                 }
                 else
                 {
-                    result++;
-                    previousIntervalEnd = Math.Max(previousIntervalEnd, nextIntervalEnd);
+                    endTime++;
+                    count--;
                 }
+                result = Math.Max(result, count);
             }
             return result;
         }
