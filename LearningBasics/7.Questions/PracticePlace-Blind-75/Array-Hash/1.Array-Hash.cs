@@ -18,8 +18,6 @@ namespace LearningBasics.PracticePlace
             //int[] nums = [1, 2, 2, 3, 3, 3];
             string[] strs = { "eats", "A", "lot", "of", "food" };
             Encode(strs);
-
-
         }
         public bool HasDuplicate(int[] nums)
         {

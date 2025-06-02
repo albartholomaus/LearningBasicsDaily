@@ -2,6 +2,6 @@
 using LearningBasics._7.Questions.PracticePlace_Blind_75.Math;
 
 
-Rotate_Image ls = new();
+Spiral_Matrix ls = new();
 
 
