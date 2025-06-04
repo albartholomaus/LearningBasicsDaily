@@ -10,7 +10,7 @@ namespace LearningBasics._7.Questions.PracticePlace_Blind_75.Bits
     {
         public Number_of_One_Bits()
         {
-            uint n= 10;
+            uint n = 10;
 
             HammingWeight(n);
         }
