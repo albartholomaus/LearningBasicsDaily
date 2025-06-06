@@ -3,6 +3,6 @@ using LearningBasics._7.Questions.PracticePlace_Blind_75.Bits;
 using LearningBasics._7.Questions.PracticePlace_Blind_75.Math;
 
 
-Counting_bits ls = new();
+Reverse_Bits ls = new();
 
 

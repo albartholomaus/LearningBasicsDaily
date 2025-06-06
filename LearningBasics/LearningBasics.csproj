@@ -10,15 +10,17 @@
   <ItemGroup>
     <Compile Remove="4.DynamicPrograminig\**" />
     <Compile Remove="6.DesignPatterns\**" />
+    <Compile Remove="PatternPractice-blind-75\**" />
     <EmbeddedResource Remove="4.DynamicPrograminig\**" />
     <EmbeddedResource Remove="6.DesignPatterns\**" />
+    <EmbeddedResource Remove="PatternPractice-blind-75\**" />
     <None Remove="4.DynamicPrograminig\**" />
     <None Remove="6.DesignPatterns\**" />
+    <None Remove="PatternPractice-blind-75\**" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="7.Questions\MS\" />
-    <Folder Include="PatternPractice-blind-75\FactoryPattern\" />
     <Folder Include="Patterns\Behavioral\Observer\OrderService\" />
   </ItemGroup>
 
